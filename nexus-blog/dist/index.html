@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Nexus Blog</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en" data-theme="">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nexus Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f10;
+      --panel: #17171a;
+      --panel-2: #1e1e23;
+      --text: #e9e9ee;
+      --muted: #a0a0aa;
+      --accent: #b22929;
+      --accent-2: #e64e4e;
+      --ring: 0 0 0 2px color-mix(in oklab, var(--accent) 35%, transparent);
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+      --serif: 'Merriweather', serif;
+      --sans: 'Inter', sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --panel: #f3f4f6;
+      --panel-2: #e5e7eb;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --accent: #b22929;
+      --accent-2: #e64e4e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Mobile Topbar */
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: saturate(1.2) blur(8px);
+      background: var(--panel)cc;
+      border-bottom: 1px solid #202028;
+      padding: 10px 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-btn,
+    #themeToggle {
+      background: var(--panel-2);
+      border: 1px solid #262630;
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: .2s;
+    }
+
+    .menu-btn:hover,
+    #themeToggle:hover {
+      border-color: #343446;
+    }
+
+    .badge {
+      font-weight: 600;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-right: 1px solid #23232a;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 100vh;
+      z-index: 40;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(180deg, #19191d, #141418);
+      padding: 10px 12px;
+      border-radius: 12px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: conic-gradient(from 210deg, var(--accent), var(--accent-2), var(--accent));
+      box-shadow: 0 6px 18px rgba(178, 41, 41, .35), inset 0 0 20px rgba(255, 255, 255, .06);
+    }
+
+    .title b {
+      font-size: 1.05rem;
+      font-family: var(--serif);
+    }
+
+    .title span {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all .2s ease;
+      outline: none;
+    }
+
+    nav a:hover {
+      background: #1f1f25;
+      transform: translateY(-1px);
+    }
+
+    nav a:focus-visible {
+      box-shadow: var(--ring);
+    }
+
+    nav a.active {
+      background: linear-gradient(180deg, #21212a, #1b1b22);
+      border: 1px solid #2b2b33;
+    }
+
+    nav a.active .dot {
+      margin-left: auto;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(178, 41, 41, .12);
+    }
+
+    .spacer {
+      flex: 1;
+    }
+
+    .social {
+      display: flex;
+      gap: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #1e1e25;
+      border: 1px solid #2a2a32;
+      color: var(--text);
+      text-decoration: none;
+      transition: all .2s;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+    }
+
+    .chip:hover {
+      transform: translateY(-2px);
+      border-color: #3a3a44;
+    }
+
+    /* Main Content */
+    .content {
+      padding: 28px clamp(16px, 3vw, 32px);
+      display: grid;
+      gap: 22px;
+      grid-template-rows: auto auto auto auto 1fr auto;
+    }
+
+    header.hero {
+      background: linear-gradient(180deg, #18181d, #121217);
+      border: 1px solid #242430;
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      color: var(--text);
+    }
+
+    .hero p {
+      margin-top: 4px;
+      color: var(--muted);
+    }
+
+    .cta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      background: #1a1a22;
+      border: 1px solid #2a2a36;
+      cursor: pointer;
+      transition: .2s;
+      font-size: .9rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      border: none;
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(178, 41, 41, .35);
+    }
+
+    /* Grid for cards */
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      background: linear-gradient(180deg, #191921, #14141a);
+      border: 1px solid #242432;
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #333345;
+    }
+
+    .thumb {
+      aspect-ratio: 16/9;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-body {
+      padding: 14px 16px;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #23232f;
+      border: 1px solid #2e2e3a;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: .78rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .card h3 {
+      margin: 6px 0;
+      font-size: 1.05rem;
+      font-family: var(--serif);
+    }
+
+    .meta {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    /* Topics Section */
+    .topics-grid {
+      grid-column: 1 / -1;
+    }
+
+    .topic-card .thumb {
+      aspect-ratio: 4/3;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .topic-card p {
+      margin: 8px 0;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    /* About & Connect */
+    #about {
+      background: var(--panel-2);
+      border-radius: var(--radius);
+      padding: 20px;
+      font-family: var(--serif);
+      text-align: center;
+      border: 1px solid #242430;
+    }
+
+    #about p {
+      margin-top: 8px;
+      color: var(--muted);
+    }
+
+    #connect {
+      background: var(--panel-2);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      border: 1px solid #242430;
+    }
+
+    #connect form {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    #connect input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      width: 60%;
+      max-width: 280px;
+      background: var(--panel);
+      color: var(--text);
+    }
+
+    /* Footer */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* Scrim for mobile */
+    .scrim {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .45);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s ease;
+      z-index: 35;
+    }
+
+    body.menu-open .scrim {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        display: flex;
+      }
+
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(84vw, 320px);
+        transform: translateX(-102%);
+        transition: transform .28s ease;
+      }
+
+      body.menu-open .sidebar {
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .card {
+        grid-column: span 12;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Mobile Topbar -->
+  <div class="topbar" role="banner">
+    <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-controls="sidebar">☰ Menu</button>
+    <div>
+      <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+      <span class="badge">Nexus Blog</span>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar" aria-label="Primary navigation">
+    <div class="box">
+      <div class="logo" aria-hidden="true"></div>
+      <div class="title">
+        <b>Nexus Blog</b>
+        <span>Ideas, stories, trends</span>
+      </div>
+    </div>
+    <nav aria-label="Main">
+      <ul>
+      	  <ul class="side_menu" id="left_menu">
+          <li>
+            <div class="menu_item">APT<span class="chev">▶</span></div>
+            <ul class="submenu">
+              <li><a href="#">Subitem 1</a></li>
+              <li><a href="#">Subitem 2</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Donec bibendum semper</a></li>
+          <li><a href="#">Proin tincidunt dapibus</a></li>
+        </ul>
+      </div>
+        <li><a class="active" href="#home"><span>🏠</span> Home <span class="dot" aria-hidden="true"></span></a></li>
+        <li><a href="#discover"><span>🔍</span> Discover</a></li>
+        <li><a href="#topics"><span>📚</span> Topics</a></li>
+        <li><a href="#about"><span>ℹ️</span> About</a></li>
+        <li><a href="#connect"><span>✉️</span> Connect</a></li>
+      </ul>
+    </nav>
+    <div class="spacer"></div>
+    <div class="social" aria-label="Social links">
+      <a class="chip" href="#" aria-label="Twitter">🐦</a>
+      <a class="chip" href="#" aria-label="GitHub">💻</a>
+      <a class="chip" href="#" aria-label="Website">🔗</a>
+      <a class="chip" href="#" aria-label="Instagram">📸</a>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <!-- Main Content -->
+  <main class="content" id="home">
+    <!-- Hero -->
+    <header class="hero">
+      <div>
+        <h1>Welcome to Nexus Blog</h1>
+        <p>Your hub for thoughtful tech, design, and future-facing ideas.</p>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#discover">Explore posts</a>
+        <a class="btn" href="#trending">View trending</a>
+      </div>
+    </header>
+
+    <!-- Discover -->
+    <section id="discover">
+      <h2 class="sr-only">Discover</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb" style="background-image: url('https://picsum.photos/seed/1/600/340')"></div>
+          <div class="card-body">
+            <div class="label"><span class="dot"></span> Featured</div>
+            <h3>Signal over noise: Designing for clarity</h3>
+            <div class="meta">5 min read • UI/UX</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb" style="background-image: url('https://picsum.photos/seed/2/600/340')"></div>
+          <div class="card-body">
+            <div class="label"><span class="dot"></span> New</div>
+            <h3>Edge, on-chain, or both? A practical guide</h3>
+            <div class="meta">7 min read • Systems</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Topics -->
+    <section id="topics">
+      <h2 class="sr-only">Topics</h2>
+      <div class="grid topics-grid">
+        <article class="card topic-card">
+          <div class="thumb" style="background-image:url('https://picsum.photos/seed/ai/400/300')"></div>
+          <div class="card-body">
+            <h3>AI & Data</h3>
+            <p>Machine learning, data science, and the future of intelligence.</p>
+            <a href="#ai" class="btn">Browse →</a>
+          </div>
+        </article>
+        <article class="card topic-card">
+          <div class="thumb" style="background-image:url('https://picsum.photos/seed/blockchain/400/300')"></div>
+          <div class="card-body">
+            <h3>Blockchain & Crypto</h3>
+            <p>On-chain innovation, NFT art, and decentralization deep dives.</p>
+            <a href="#blockchain" class="btn">Browse →</a>
+          </div>
+        </article>
+        <article class="card topic-card">
+          <div class="thumb" style="background-image:url('https://picsum.photos/seed/webdev/400/300')"></div>
+          <div class="card-body">
+            <h3>Web Development</h3>
+            <p>Modern front-end, APIs, and full-stack best practices.</p>
+            <a href="#webdev" class="btn">Browse →</a>
+          </div>
+        </article>
+        <article class="card topic-card">
+          <div class="thumb" style="background-image:url('https://picsum.photos/seed/digitalart/400/300')"></div>
+          <div class="card-body">
+            <h3>Digital Art</h3>
+            <p>Neon cyberpunk, fractal abstraction, and creative tooling.</p>
+            <a href="#art" class="btn">Browse →</a>
+          </div>
+        </article>
+        <article class="card topic-card">
+          <div class="thumb" style="background-image:url('https://picsum.photos/seed/ux/400/300')"></div>
+          <div class="card-body">
+            <h3>UX & Design</h3>
+            <p>Human-centered interfaces, accessibility, and visual rhythm.</p>
+            <a href="#ux" class="btn">Browse →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Trending -->
+    <section id="trending">
+      <h2 class="sr-only">Trending</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb" style="background-image: url('https://picsum.photos/seed/3/600/340')"></div>
+          <div class="card-body">
+            <div class="label"><span class="dot"></span> Trending</div>
+            <h3>Composability as a creative constraint</h3>
+            <div class="meta">4 min read • Dev</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb" style="background-image: url('https://picsum.photos/seed/4/600/340')"></div>
+          <div class="card-body">
+            <div class="label"><span class="dot"></span> Popular</div>
+            <h3>Latency budgets that actually ship</h3>
+            <div class="meta">6 min read • Infra</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2>About Nexus Blog</h2>
+      <p>Born from curiosity at the intersection of technology, art, and community. We share stories that spark ideas.</p>
+    </section>
+
+    <!-- Connect -->
+    <section id="connect">
+      <h3>Stay in the Loop</h3>
+      <form>
+        <input type="email" placeholder="Your email address" required />
+        <button class="btn primary">Subscribe</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <span>© <span id="year"></span> Nexus Blog</span>
+      <span>Crafted with focus and curiosity.</span>
+    </footer>
+  </main>
+
+  <script>
+    // Mobile menu
+    const body = document.body;
+    const toggle = document.getElementById('menuToggle');
+    const scrim = document.getElementById('scrim');
+    const sidebar = document.getElementById('sidebar');
+
+    function openMenu() {
+      body.classList.add('menu-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      scrim.hidden = false;
+    }
+
+    function closeMenu() {
+      body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      scrim.hidden = true;
+    }
+    toggle?.addEventListener('click', () => {
+      body.classList.contains('menu-open') ? closeMenu() : openMenu();
+    });
+    scrim?.addEventListener('click', closeMenu);
+    window.addEventListener('keydown', e => e.key === 'Escape' && closeMenu());
+    sidebar.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 900px)').matches) closeMenu();
+      });
+    });
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? '' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      themeBtn.textContent = next === 'light' ? '☀️' : '🌙';
+    });
+    // Year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
+```
+    
+  </body>
+  
+</html>
