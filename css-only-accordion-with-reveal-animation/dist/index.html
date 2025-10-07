@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>CSS-only Accordion with Reveal Animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet"/><link rel="stylesheet" href="./style.css">
+<style>
+:root { 	--size-header: 2.25rem; 	--size-accordion-title: 1.25rem; 	--size-accordion-content: 1rem; 	--animation-speed: 100; 	--slide-ease: cubic-bezier(0.86, 0, 0.07, 1); 	--slide-duration: calc(400ms * 100 / var(--animation-speed)); 	--slide-delay: calc(450ms * 100 / var(--animation-speed)); 	--circle-duration: calc(900ms * 100 / var(--animation-speed)); } *, *::before, *::after { 	position: relative; 	left: 0; 	top: 0; 	box-sizing: border-box; } a, p, h1 { 	margin: 0; } html { 	height: 100%; } body { 	background-color: hsl(4, 91%, 60%); 	font-family: Nunito, Arial, Helvetica, sans-serif; 	font-weight: 600; 	margin: 0; 	display: grid; 	place-items: center; 	padding: 2rem 2rem; 	min-height: 100%; } html, body { 	scroll-behavior: smooth; 	scroll-padding-top: 1rem; } main > h1 { 	font-size: var(--size-header); 	margin-bottom: 1.25rem; 	color: #fff; } ::selection { 	background-color: rgba(0, 0, 0, 0.4); } .accordion { 	--circle-x: 1.8rem; 	--circle-y: 0; 	--circle-r: 200%; 	--circle-bg: #fff; 	color: #000; 	background-color: var(--circle-bg); 	max-width: 56ch; 	margin-bottom: 1rem; 	border-radius: min(8px, 0.5rem); 	display: grid; 	grid-template-rows: 0fr 0fr; 	transition-timing-function: var(--slide-ease); 	transition-duration: 200ms, 200ms, var(--slide-duration); 	transition-property: opacity, box-shadow, grid-template-rows; 	transition-delay: 0ms, 0ms, var(--slide-delay); 	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); 	opacity: 0.9; } .accordion:not(:target):hover { 	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5); } .accordion:not(:target):active { 	opacity: 1; 	box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.3); } .accordion, .content { 	overflow: hidden; } .accordion:target { 	--d: 90deg; 	grid-template-rows: 0fr 1fr; 	transition: grid-template-rows var(--slide-ease) var(--slide-duration) 		var(--slide-delay); } .wrapper { 	padding-block: 0 1.05rem; 	padding-inline: 1.25rem; } .content { 	font-size: var(--size-accordion-content); 	line-height: 140%; } .content p { 	margin-bottom: 1rem; } .content a { 	color: currentColor; 	font-weight: 800; 	text-decoration: underline; } main :last-child, .content :last-child { 	margin-bottom: 0; } .title a { 	padding: 1rem 1.25rem; 	font-size: var(--size-accordion-title); 	font-weight: 800; 	color: currentColor; 	text-decoration: none; 	display: flex; 	flex-direction: row; 	place-items: center; } .title a::before { 	--chevron-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3C!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cpath fill='white' d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/%3E%3C/svg%3E"); 	content: ""; 	left: 0; 	top: 0; 	width: 0.65rem; 	aspect-ratio: 320 / 512; 	display: inline-block; 	margin-right: 0.75rem; 	transform: rotate(var(--d, 0deg)); 	transition: transform var(--slide-ease) var(--slide-duration) 		var(--slide-delay); 	mask-image: var(--chevron-icon); 	mask-size: 100% 100%; 	-webkit-mask-image: var(--chevron-icon); 	-webkit-mask-size: 100% 100%; 	background-color: currentColor; } .accordion::before, .accordion::after { 	content: ""; 	position: absolute; 	width: 100%; 	height: 100%; 	background-color: var(--circle-bg); 	mix-blend-mode: difference; 	transform-style: preserve-3d; 	transition-timing-function: ease; 	transition-property: opacity, clip-path, visibility; 	pointer-events: none; 	clip-path: circle(var(--r) at var(--circle-x) var(--circle-y)); 	border-radius: inherit; 	z-index: 4; } .accordion::before { 	--r: 0%; 	transition-delay: var(--circle-duration), var(--circle-duration), 0ms; 	transition-duration: 0ms, var(--circle-duration), 0ms; 	opacity: 0; } .accordion:target::before { 	--r: var(--circle-r); 	transition-delay: 0ms, 0ms, 0ms; 	transition-duration: 0ms, var(--circle-duration), 0ms; 	opacity: 1; } .accordion::after { 	--r: var(--circle-r); 	transition-delay: 0ms, 0ms, var(--circle-duration); 	transition-duration: 0ms, var(--circle-duration), 0ms; 	visibility: hidden; 	opacity: 1; } .accordion:target:after { 	--r: 0%; 	transition-delay: 0ms, 0ms, 0ms; 	transition-duration: 0ms, 0ms, 0ms; 	visibility: visible; 	opacity: 0; } .title a:focus-visible { 	background-color: hsl(0, 100%, 90%); 	outline: none; } .accordion:target .title a:focus-visible { 	background-color: hsl(183, 100%, 93%); }
+/* Keep list content inside container and readable */
+.content ul,
+.content li {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+/* Add proper indentation for nested lists */
+.content ul {
+  list-style-position: inside;
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.content li {
+  margin-bottom: 0.4rem;
+}
+
+/* Prevent deep nested lists from smashing the edge */
+.content ul ul {
+  padding-left: 1.5rem;
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+
+</style>
+  </head>
+    
+  <body>
+  <main>
+	<h1>Master of Your Domain Table of Contents</h1>
+	<section class="accordion" id="chaptera">
+		<h1 class="title"><a href="#chaptera">The Human Operating System: A Primer on Psychological Exploitation</a></h1>
+		<div class="content">
+			<div class="wrapper">
+				<p>
+					This chapter focuses on the psychological aspects of social engineering within the context of Active Directory. This chapter also covers the psychological vulnerabilities attackers exploit, offensive tactics for gaining privileged access through manipulations, and defensive strategies that use psychological principles to fortify human and technical defenses.</p>
+<ul>
+  <li><strong>Part I: The Human Operating System</strong>
+    <ul>
+      <li><strong>Module 1: The Mind as a Threat Model</strong>
+        <ul>
+          <li>1.1 Explain how cognitive biases and heuristics (e.g., trust, authority bias) make humans the weakest link in security.</li>
+          <li>1.2 Explain the Psychological Principles: behind urgency, fear, and curiosity as social engineering drivers.</li>
+         <li>1.3 Discuss the Psychology of the Target: personality types, roles, and susceptibility to manipulation.</li>
+        </ul>
+      </li>
+      <li><strong>Module 2: The Attacker’s Toolkit</strong>
+        <ul>
+          <li>2.1 Reconnaissance with a Psychological Edge: Explain how attackers build a psychological profile of their targets using publicly available information from social media and other sources.</li>
+          <li>2.2 Crafting the Perfect Pretext: Discuss advanced pretexting, baiting, and quid pro quo scenarios tailored to specific roles within AD.</li>
+          <li>2.3 The Art of Impersonation: Explain how using Deepfakes and advanced impersonation techniques create realistic and emotionally resonant attacks.</li>
+        </ul>
+      </li>
+      <h3>Part II: Active Directory: The Crown Jewels of Social Engineering</h3>
+      <li><strong>Module 3: The Active Directory Kill Chain with a Human Focus</strong></li>
+    <ul>
+<li>3.1 Map the human-centric stages of an attack on Active Directory, from initial access through reconnaissance to lateral movement.</li>
+<li>3.2 Explain how leveraging social engineering to bypass technical controls aids in obtaining initial foothold credentials.</li>
+<li>3.3 Explain how exploiting a victim's trust leads to pivoting into higher-privileged AD accounts.</li>
+    </ul>
+  </li>
+  <li><strong>Module 4: Privilege Escalation Through Persuasion</strong>
+  <ul>
+ <li>4.1 The Helpdesk is a Dead Giveaway: Explain how targeting IT helpdesk personnel through psychological tactics aid in getting credentials or password resets for privileged accounts.</li>
+<li>The Unconscious Administrator: Discuss techniques attackers use to trick system administrators into unknowingly performing an action (e.g., running a malicious script or approving a policy change) that facilitates an attack.</li>
+<li>4.3 Supply Chain as a Social Vector: Explain how manipulating a trusted third-party or vendor or contractor leads an attacker to gaining access to an organization's network and Active Directory.</li>
+</ul>
+</li>
+<li><strong>Module 5: Deception in Plain Sight: Staying Undetected</strong>
+<ul>
+<li>5.1 Blending In: Explain ways in which using social camouflage and psychological manipulation aids attackers in moving laterally within a network without arising suspicion giving examples of what attackers look for when searching for defensive barriers and tactics for defenders.</li>
+<li>5.2 Forging Trust: Simulate legitimate AD activities to create a deceptive trait that misleads blue teams and appears as normal user behavior.</li>
+<li>5.3 Adversary Playbook: Simulate advanced persistent threat (APT) that combines sophisticated technical exploits with patient, long-term social engineering.</li>
+  	</ul>
+</li>
+<h3>Part III: The Psychology of Defensive Countermeasures</h3>
+<ul>
+<li><strong>Module 6: Hardening the Human Firewall Chain</strong>
+<ul>
+<li>6.1 Psychology-Based Security Awareness Training: Moving beyond standard, checklist-based training to simulate real-world, psychologically manipulative attacks.</li>
+<li><6.2 Building a "Questioning Culture:" Discuss ways to create an organizational culture where employees feel comfortable questioning suspicious requests without fear of repercussions.</li>
+<li>6.3 Red Team for the People: Explain how to integrate social engineering simulations into red team exercises to assess and improve the human element of security.ecurity Awareness Training: Moving beyond standard, checklist-based training to simulate real-world, psychologically manipulative attacks.</li>
+</ul>
+</li>
+<li><strong>Module 7: Active Deception in Active Directory</strong>
+<ul>
+	<li>7.1 Deploying Psych7.1 Deploying Psychological Tripwires: Using honeytokens, and decoy user accounts, explain how these are psychologically compelling to an attacker but trigger an alert when accessed.</li>
+<li>7.2 Manipulating the Attacker: Turning the Table: Create deceptive AD objects, trusts, and data that lure attackers into a controlled "deception environment" and discuss.</li>
+<li>7.3 Cognitive Load Defense: Explain how using sophisticated and realistic deceptions overwhelm an attacker's cognitive processing to increase their chance of making a mistake.</li>
+<ul>
+	<li>
+<li><strong>Module 8: The Adaptive Defense: Behavioral Analytics</strong>
+<ul>
+	<li>8.1 Psychological Baselines: Explain how using behavioral analytics to establish a normal pattern of user and administrator behaviors in AD, making it easier to spot subtle, psychologically driven anomalies.</li>
+<li>8.2 Predictive Psychology: Explain how to leverage machine learning to predict potential social engineering targets based on publicly available information and internal data.</li>
+<li>8.3 Responding with Empathy and Authority: Develop incident response playbooks that incorporate psychological best Practices for handling compromised employees and communicating during an attack.</li>
+</ul>
+</li>
+
+
+
+
+
+
+			</div>
+		</div>
+	</section>
+
+	<section class="accordion" id="how-does-it-work">
+		<h1 class="title"><a href="#how-does-it-work">How does it work?</a></h1>
+		<div class="content">
+			<div class="wrapper">
+				<p>
+					We cannot transition height or any CSS property from zero to auto. If we
+					want to smoothly expand a collapsed accordion, we could set a
+					<code>max-height</code> and transition the <code>height</code> property
+					to a large value when we expand the section. However,
+					<a href="https://css-tricks.com/using-css-transitions-auto-dimensions/#aa-there-are-two-crucial-downsides-to-this" target="_blank">it may not properly work</a>
+					if the content is larger than the <code>max-height</code>.
+				</p>
+				<p>
+					So, here we create a CSS grid with a grid item. Then we transition the
+					<code>grid-template-rows</code> property from <code>0fr</code> to
+					<code>1fr</code> and the grid item transitions to its content height.
+				</p>
+				<p>
+					I used CSS <code>clip-path</code> and <code>mix-blend-mode</code> to
+					animate the background and text color of the accordion. Each accordion
+					has two pseudo-elements. We know that <code>opacity</code>,
+					<code>clip-path</code> and, <code>visibility</code> are animatable CSS
+					properties. So when the accordion is selected using the
+					<code>:target</code> pseudo-class, we transition the clip-path circle
+					radius to 200% of the
+					<code>::before</code>
+					pseudo-element. When the accordion is not selected, we do the same with
+					the
+					<code>::after</code> but this time with a delay. This creates an
+					illusion as it appears to clip from inside.
+				</p>
+				<p>
+					Since the accordion's title is an anchor element, users can also
+					navigate through the items with their keyboard.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="accordion" id="inspiration">
+		<h1 class="title"><a href="#inspiration">Inspiration</a></h1>
+		<div class="content">
+			<div class="wrapper">
+				<p>
+					In a recent video, Kevin showed us a way to animate height from zero to
+					auto value. Seeing that, I couldn't resist experimenting with the idea.
+					Then I came up with this CSS-only accordion component and added the
+					reveal animation too!
+				</p>
+				<p>
+					I would highly recommend watching
+					<a href="https://youtu.be/B_n4YONte5A" target="_blank">his video</a>,
+					where he beautifully explains the technique and points out how he
+					discovered it. Also, read
+					<a href="https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/" target="_blank">Keith J. Grant's post</a>
+					and
+					<a href="https://nemzes.net/posts/animating-height-auto/" target="_blank">Nelson Menezes's post</a>
+					on the same topic.
+				</p>
+			</div>
+		</div>
+	</section>
+	
+	<section class="accordion" id="chapter1">
+		<h1 class="title"><a href="#chapter1">Chapter 1</a></h1>
+		<div class="content">
+			<div class="wrapper">
+				<p>
+					In a recent video, Kevin showed us a way to animate height from zero to
+					auto value. Seeing that, I couldn't resist experimenting with the idea.
+					Then I came up with this CSS-only accordion component and added the
+					reveal animation too!
+				</p>
+				<p>
+					I would highly recommend watching
+					<a href="https://youtu.be/B_n4YONte5A" target="_blank">his video</a>,
+					where he beautifully explains the technique and points out how he
+					discovered it. Also, read
+					<a href="https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/" target="_blank">Keith J. Grant's post</a>
+					and
+					<a href="https://nemzes.net/posts/animating-height-auto/" target="_blank">Nelson Menezes's post</a>
+					on the same topic.
+				</p>
+			</div>
+		</div>
+	</section>
+	
+	<section class="accordion" id="inspiration">
+		<h1 class="title"><a href="#inspiration">Inspiration</a></h1>
+		<div class="content">
+			<div class="wrapper">
+				<p>
+					In a recent video, Kevin showed us a way to animate height from zero to
+					auto value. Seeing that, I couldn't resist experimenting with the idea.
+					Then I came up with this CSS-only accordion component and added the
+					reveal animation too!
+				</p>
+				<p>
+					I would highly recommend watching
+					<a href="https://youtu.be/B_n4YONte5A" target="_blank">his video</a>,
+					where he beautifully explains the technique and points out how he
+					discovered it. Also, read
+					<a href="https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/" target="_blank">Keith J. Grant's post</a>
+					and
+					<a href="https://nemzes.net/posts/animating-height-auto/" target="_blank">Nelson Menezes's post</a>
+					on the same topic.
+				</p>
+			</div>
+		</div>
+	</section>
+	
+	<section class="accordion" id="inspiration">
+		<h1 class="title"><a href="#inspiration">Inspiration</a></h1>
+		<div class="content">
+			<div class="wrapper">
+				<p>
+					In a recent video, Kevin showed us a way to animate height from zero to
+					auto value. Seeing that, I couldn't resist experimenting with the idea.
+					Then I came up with this CSS-only accordion component and added the
+					reveal animation too!
+				</p>
+				<p>
+					I would highly recommend watching
+					<a href="https://youtu.be/B_n4YONte5A" target="_blank">his video</a>,
+					where he beautifully explains the technique and points out how he
+					discovered it. Also, read
+					<a href="https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/" target="_blank">Keith J. Grant's post</a>
+					and
+					<a href="https://nemzes.net/posts/animating-height-auto/" target="_blank">Nelson Menezes's post</a>
+					on the same topic.
+				</p>
+			</div>
+		</div>
+	</section>
+	
+	<section class="accordion" id="inspiration">
+		<h1 class="title"><a href="#inspiration">Inspiration</a></h1>
+		<div class="content">
+			<div class="wrapper">
+				<p>
+					In a recent video, Kevin showed us a way to animate height from zero to
+					auto value. Seeing that, I couldn't resist experimenting with the idea.
+					Then I came up with this CSS-only accordion component and added the
+					reveal animation too!
+				</p>
+				<p>
+					I would highly recommend watching
+					<a href="https://youtu.be/B_n4YONte5A" target="_blank">his video</a>,
+					where he beautifully explains the technique and points out how he
+					discovered it. Also, read
+					<a href="https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/" target="_blank">Keith J. Grant's post</a>
+					and
+					<a href="https://nemzes.net/posts/animating-height-auto/" target="_blank">Nelson Menezes's post</a>
+					on the same topic.
+				</p>
+			</div>
+		</div>
+	</section>
+</main>
+    
+  </body>
+  
+</html>
