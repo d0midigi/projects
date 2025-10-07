@@ -1,0 +1,7 @@
+body {
+  margin: 0;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding-inline: 1rem;
+}
