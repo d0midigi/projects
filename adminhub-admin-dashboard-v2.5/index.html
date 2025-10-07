@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>AdminHub Admin Dashboard v2.5</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link href='https://unpkg.com/boxicons@2.1.4/dist/boxicons.js' rel='stylesheet'>
+
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<title>AdminHub</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile  bx-lg'></i>
+			<span class="text">AdminHub</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard bx-sm' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-shopping-bag-alt bx-sm' ></i>
+					<span class="text">My Store</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-doughnut-chart bx-sm' ></i>
+					<span class="text">Analytics</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-message-dots bx-sm' ></i>
+					<span class="text">Message</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-group bx-sm' ></i>
+					<span class="text">Team</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu bottom">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog bx-sm bx-spin-hover' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bx-power-off bx-sm bx-burst-hover' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+<nav>
+    <i class='bx bx-menu bx-sm'></i>
+    <a href="#" class="nav-link" id="categoriesLink">Categories</a>
+    <div class="categories-menu" id="categoriesMenu">
+    <ul>
+        <li><a href="#"><i class='bx bxs-devices'></i>Electronics</a></li>
+        <li><a href="#"><i class='bx bxs-t-shirt'></i>Fashion</a></li>
+        <li><a href="#"><i class='bx bxs-home'></i>Home & Garden</a></li>
+        <li><a href="#"><i class='bx bxs-football'></i>Sports</a></li>
+        <li><a href="#"><i class='bx bxs-book'></i>Books</a></li>
+    </ul>
+</div>
+    <form action="#">
+        <div class="form-input">
+            <input type="search" placeholder="Search...">
+            <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+        </div>
+    </form>
+    <input type="checkbox" class="checkbox" id="switch-mode" hidden />
+    <label class="swith-lm" for="switch-mode"  title="Toggle Dark/Light Mode">
+        <i class="bx bxs-moon"></i>
+        <i class="bx bx-sun"></i>
+        <div class="ball"></div>
+    </label>
+
+    <!-- Notification Bell -->
+    <a href="#" class="notification" id="notificationIcon" aria-label="Notifications">
+    <i class='bx bxs-bell bx-tada-hover'></i>
+    <span class="num">5</span>
+	</a>
+    <div class="notification-menu" id="notificationMenu">
+        <ul>
+            <li>New message from John</li>
+            <li>Your order has been shipped</li>
+            <li>New comment on your post</li>
+            <li>Update available for your app</li>
+            <li>Reminder: Meeting at 3PM</li>
+        </ul>
+    </div>
+
+    <!-- Profile Menu -->
+    <a href="#" class="profile" id="profileIcon">
+        <img src="https://placehold.co/50x50.png" alt="Profile">
+    </a>
+    <div class="profile-menu" id="profileMenu">
+        <ul>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Log Out</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- NAVBAR -->
+
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="https://github.com/saglik216/AdminHub-Admin-Template-V2.5-Typescript-version" class="btn-download"  target="_blank">
+					<i class='bx bxs-cloud-download bx-fade-down-hover' ></i>
+					<span class="text">TypeScript version released on github</span>
+				</a>
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-calendar-check' ></i>
+					<span class="text">
+						<h3>1020</h3>
+						<p>New Order</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>2834</h3>
+						<p>Visitors</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-dollar-circle' ></i>
+					<span class="text">
+						<h3>N$2543.00</h3>
+						<p>Total Sales</p>
+					</span>
+				</li>
+			</ul>
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Recent Orders</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<div class="order-filters">
+    <input type="text" id="searchUser" placeholder="Search by user...">
+    <select id="filterStatus">
+        <option value="all">All</option>
+        <option value="completed">Completed</option>
+        <option value="pending">Pending</option>
+        <option value="process">Process</option>
+    </select>
+</div>
+					<table>
+						<thead>
+							<tr>
+								<th>İmg</th>
+								<th>User</th>
+								<th>Date Order</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<img src="https://placehold.co/50x50.png">
+									
+								</td>
+								<td>
+									<span>Micheal John</span>
+									<p>micheal_john@mail.com</p></td>
+								<td>18-10-2021</td>
+								<td><span class="status completed">Completed</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="https://placehold.co/50x50.png">
+								</td>
+								<td>
+									<span>Ryan Doe</span>
+									<p>riyan_doe@mail.com</p>
+								</td>
+								<td>01-06-2022</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="https://placehold.co/50x50.png">
+								</td>
+								<td>
+									<span>Tarry White</span>
+									<p>tarry_white@mail.com</p>
+								</td>
+								<td>14-10-2021</td>
+								<td><span class="status process">Process</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="https://placehold.co/50x50.png">
+								</td>
+								<td>
+									<span>Salma</span>
+									<p>salma_doe@mail.com</p>
+								</td>
+								<td>01-02-2023</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="https://placehold.co/50x50.png">
+								</td>
+								<td>
+									<span>Andreas Doe</span>
+									<p>anderas_doe@mail.com</p>
+								</td>
+								<td>31-10-2021</td>
+								<td><span class="status completed">Completed</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="todo">
+    <div class="head">
+        <h3>Todos</h3>
+        <i class='bx bx-plus icon'></i>
+	</div>
+    <div class="todo-filters">
+    <button onclick="filterTodos('all')">All</button>
+    <button onclick="filterTodos('completed')" class="completed">Completed</button>
+    <button onclick="filterTodos('pending')" class="pending">Pending</button>
+	</div>
+    <ul class="todo-list">
+    <li class="completed" data-progress="100">
+        <span class="progress-text">%100</span>
+        <p>Check Inventory</p>
+        <i class='bx bx-dots-vertical-rounded menu-icon'>
+            <dl class="content-menu">
+                <dt class="menu-item"><a href="#">Edit</a></dt>
+                <dt class="menu-item"><a href="#">Delete</a></dt>
+                <dt class="menu-item"><a href="#">Mark as Pending</a></dt>
+            </dl>
+        </i>
+    </li>
+    <li class="completed" data-progress="100">
+        <span class="progress-text">%100</span>
+        <p>Manage Delivery Team</p>
+        <i class='bx bx-dots-vertical-rounded menu-icon'>
+            <dl class="content-menu">
+                <dt class="menu-item"><a href="#">Edit</a></dt>
+                <dt class="menu-item"><a href="#">Delete</a></dt>
+                <dt class="menu-item"><a href="#">Mark as Pending</a></dt>
+            </dl>
+        </i>
+    </li>
+    <li class="not-completed" data-progress="45">
+        <span class="progress-text">%45</span>
+        <p>Contact Salma: Confirm Delivery</p>
+        <i class='bx bx-dots-vertical-rounded menu-icon'>
+            <dl class="content-menu">
+                <dt class="menu-item"><a href="#">Edit</a></dt>
+                <dt class="menu-item"><a href="#">Delete</a></dt>
+                <dt class="menu-item"><a href="#">Mark as Pending</a></dt>
+            </dl>
+        </i>
+    </li>
+    <li class="not-completed" data-progress="67">
+        <span class="progress-text">%67</span>
+        <p>Update Shop Catalogue</p>
+        <i class='bx bx-dots-vertical-rounded menu-icon'>
+            <dl class="content-menu">
+                <dt class="menu-item"><a href="#">Edit</a></dt>
+                <dt class="menu-item"><a href="#">Delete</a></dt>
+                <dt class="menu-item"><a href="#">Mark as Pending</a></dt>
+            </dl>
+        </i>
+    </li>
+    <li class="not-completed" data-progress="10">
+        <span class="progress-text">%10</span>
+        <p>Count Profit Analytics</p>
+        <i class='bx bx-dots-vertical-rounded menu-icon'>
+            <dl class="content-menu">
+                <dt class="menu-item"><a href="#">Edit</a></dt>
+                <dt class="menu-item"><a href="#">Delete</a></dt>
+                <dt class="menu-item"><a href="#">Mark as Pending</a></dt>
+            </dl>
+        </i>
+    </li>
+</ul>
+
+</div>
+
+			</div>
+      <div class="sample-form">
+                    <div class="head">
+                        <h3>Sample Form</h3>
+                    </div>
+                    <form class="form-container" onSubmit={handleFormSubmit}>
+                        <div class="form-group">
+                            <label For="name">Name:</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" value="" onChange="" required />
+                        </div>
+                        <div class="form-group">
+                            <label For="email">Email:</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" value="" onChange="" required />
+                        </div>
+                        <div class="form-group">
+                            <label For="message">Message:</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Your message" value="" onChange="" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Submit</button>
+                    </form>
+                </div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="script.js"></script>
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
