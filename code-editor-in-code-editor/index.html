@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Code Editor in Code Editor</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Runnable Text Editor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <h1>Advanced Runnable Editor</h1>
+        <p>Glassmorphism UI, JS Syntax Highlighting, Code Execution, Custom Console</p>
+
+        <div id="editor-wrapper">
+            <div id="editor-container">
+                <div class="editor-gutter">
+                    <div id="line-numbers" class="line-numbers"><div>1</div></div>
+                </div>
+                <div class="editor-content">
+                    <textarea id="editing-area" class="editing-area" spellcheck="false" wrap="off" autocorrect="off" autocapitalize="off">
+// Type JavaScript code here and click Run!
+console.log("Hello from the Editor!");
+
+function factorial(n) {
+  if (n < 0) {
+    console.error("Factorial not defined for negative numbers");
+    return NaN; // Not a Number
+  }
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+  // This is a recursive call
+  return n * factorial(n - 1);
+}
+
+const num = 5;
+const result = factorial(num);
+console.log(`Factorial of ${num} is:`, result);
+
+console.warn("This is a warning message.");
+
+// Example of an object
+const myObj = { name: "Editor", version: 2.0, features: ["highlighting", "runnable", "console"] };
+console.log("My Object:", myObj);
+
+// Uncomment the line below to see error handling
+// throw new Error("This is a simulated error!");
+
+// You can define classes too
+class Greeter {
+    constructor(name) {
+        this.name = name;
+    }
+    greet() {
+        console.log(`Greetings, ${this.name}!`);
+    }
+}
+
+const greeter = new Greeter("User");
+greeter.greet();
+
+                    </textarea>
+                    <pre id="highlighting-area" class="highlighting-area" aria-hidden="true"><code>
+                         <!-- Highlighted code appears here -->
+                    </code></pre>
+                </div>
+            </div>
+            <div class="editor-controls">
+                <button id="run-button" class="control-button">Run Code</button>
+                <button id="clear-console-button" class="control-button clear-button">Clear Console</button>
+            </div>
+        </div>
+
+        <div id="console-wrapper">
+            <h2>Console Output</h2>
+            <pre id="console-output" class="console-output"></pre>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

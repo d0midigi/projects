@@ -1,0 +1,317 @@
+/* --- Base and Typography --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 30px 20px; /* Reduced top/bottom padding slightly */
+    background: linear-gradient(140deg, #5b2ab7 0%, #2c3e50 100%); /* New gradient */
+    color: #e0e0e0; /* Slightly off-white default */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center; /* Center main container */
+    align-items: flex-start; /* Align top */
+}
+
+.main-container {
+    width: 90%;
+    max-width: 1200px; /* Allow wider layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+h1 {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+h2 {
+     font-weight: 400;
+     margin-top: 0;
+     margin-bottom: 10px;
+     color: rgba(255, 255, 255, 0.8);
+     font-size: 1.1em;
+}
+
+p {
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+/* --- Editor Variables --- */
+:root {
+    --editor-font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    --editor-font-size: 14px;
+    --editor-line-height: 1.6; /* Slightly increased line height */
+    --editor-padding: 18px;   /* Increased padding */
+    --gutter-width: 55px;     /* Slightly wider gutter */
+    --border-radius: 12px;    /* More rounded corners */
+    --tab-size: 4;
+    --console-font-size: 13px;
+    --console-line-height: 1.5;
+}
+
+/* --- Editor Wrapper & Container (Refined Glassmorphism) --- */
+#editor-wrapper {
+    width: 100%;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+#editor-container {
+    display: flex;
+    height: 60vh; /* Adjusted height */
+    min-height: 350px;
+    position: relative;
+    font-family: var(--editor-font-family);
+    font-size: var(--editor-font-size);
+    line-height: var(--editor-line-height);
+    border-radius: var(--border-radius) var(--border-radius) 0 0; /* Round top corners only */
+    overflow: hidden;
+
+    /* Refined Glassmorphism */
+    background: rgba(0, 0, 0, 0.25); /* Darker base */
+    backdrop-filter: blur(15px) saturate(120%);
+    -webkit-backdrop-filter: blur(15px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: none; /* Remove bottom border, controls will have it */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Editor Controls Bar --- */
+.editor-controls {
+    background: rgba(0, 0, 0, 0.35); /* Slightly darker than editor */
+    padding: 10px var(--editor-padding);
+    border-radius: 0 0 var(--border-radius) var(--border-radius); /* Round bottom corners */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: none; /* Top border comes from editor */
+    display: flex;
+    gap: 10px;
+    backdrop-filter: blur(15px) saturate(120%); /* Match blur */
+    -webkit-backdrop-filter: blur(15px) saturate(120%);
+}
+
+.control-button {
+    padding: 8px 18px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.15);
+    color: #eee;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.control-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.control-button:active {
+     background: rgba(255, 255, 255, 0.1);
+     transform: scale(0.98);
+}
+
+.clear-button {
+    background: rgba(255, 100, 100, 0.15);
+    color: #f8baba;
+    border-color: rgba(255, 100, 100, 0.2);
+    margin-left: auto; /* Push clear button to the right */
+}
+.clear-button:hover {
+    background: rgba(255, 100, 100, 0.25);
+    box-shadow: 0 0 10px rgba(255, 100, 100, 0.1);
+}
+.clear-button:active {
+     background: rgba(255, 100, 100, 0.1);
+}
+
+
+/* --- Editor Gutter --- */
+.editor-gutter {
+    flex-shrink: 0;
+    width: var(--gutter-width);
+    background-color: rgba(0, 0, 0, 0.1); /* Subtle difference */
+    padding: var(--editor-padding) 5px var(--editor-padding) var(--editor-padding);
+    box-sizing: border-box;
+    user-select: none;
+    overflow: hidden;
+    position: relative;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.line-numbers {
+    text-align: right;
+    color: rgba(255, 255, 255, 0.4); /* Dimmer numbers */
+    font-size: calc(var(--editor-font-size) - 1px); /* Slightly smaller */
+    line-height: inherit;
+    white-space: pre;
+    font-family: inherit;
+    position: absolute;
+    top: var(--editor-padding);
+    left: 0;
+    right: 5px;
+    bottom: var(--editor-padding);
+    overflow: hidden;
+}
+
+.line-numbers div {
+    min-height: calc(var(--editor-font-size) * var(--editor-line-height));
+    height: calc(var(--editor-font-size) * var(--editor-line-height));
+    box-sizing: border-box;
+    padding-right: 10px; /* More space between number and code */
+}
+
+/* --- Editor Content Area --- */
+.editor-content {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    /* Padding applied to children to handle scroll correctly */
+}
+
+/* The Hidden Textarea */
+.editing-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: var(--editor-padding); /* Match visual padding */
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    resize: none;
+    background-color: transparent;
+    color: transparent;
+    caret-color: #00e0ff; /* Cyan caret */
+    z-index: 1;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: pre;
+    overflow: auto; /* Handles scrolling */
+    tab-size: var(--tab-size);
+    -moz-tab-size: var(--tab-size);
+    -o-tab-size: var(--tab-size);
+}
+
+/* The Visible Highlighted Code Area */
+.highlighting-area {
+    position: absolute;
+    top: var(--editor-padding);
+    left: var(--editor-padding);
+    right: var(--editor-padding);
+    bottom: var(--editor-padding);
+    margin: 0;
+    padding: 0; /* Padding is visual via parent/textarea */
+    box-sizing: border-box;
+    z-index: 0;
+    overflow: hidden; /* Scroll handled by sync */
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: pre;
+    color: #dbe0e8; /* Default text color - light grey/blue */
+    tab-size: var(--tab-size);
+    -moz-tab-size: var(--tab-size);
+    -o-tab-size: var(--tab-size);
+    pointer-events: none;
+}
+
+.highlighting-area code {
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: inherit;
+}
+
+/* --- Console Output --- */
+#console-wrapper {
+    width: 100%;
+    margin-top: 10px; /* Space below controls */
+}
+
+.console-output {
+    font-family: var(--editor-font-family); /* Monospace for console */
+    font-size: var(--console-font-size);
+    line-height: var(--console-line-height);
+    color: #ccc;
+    background: rgba(0, 0, 0, 0.4); /* Darker console background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: var(--editor-padding);
+    height: 25vh; /* Console height */
+    min-height: 100px;
+    max-height: 300px; /* Limit console growth */
+    overflow: auto; /* Enable scrolling */
+    white-space: pre-wrap; /* Wrap long lines */
+    word-wrap: break-word; /* Break words if needed */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px) saturate(110%);
+    -webkit-backdrop-filter: blur(10px) saturate(110%);
+}
+
+.console-output .log { color: #e0e0e0; }
+.console-output .warn { color: #ffd700; } /* Gold */
+.console-output .error { color: #ff8a8a; } /* Light Red */
+.console-output .info { color: #87ceeb; } /* Sky Blue */
+.console-output div:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07); /* Separator lines */
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+/* --- Syntax Highlighting Styles (Vibrant) --- */
+.token-comment { color: #8a9baf; font-style: italic; }
+.token-string { color: #c3e88d; } /* Lime Green */
+.token-number { color: #f78c6c; } /* Orange */
+.token-keyword { color: #c792ea; } /* Light Purple */
+.token-boolean, .token-null { color: #f78c6c; } /* Orange */
+.token-operator, .token-punctuation { color: #89ddff; } /* Light Cyan */
+.token-function { color: #82aaff; } /* Light Blue */
+.token-class-name { color: #ffcb6b; } /* Yellow/Gold */
+.token-regex { color: #f07178; } /* Salmon Red */
+
+
+/* --- Custom Scrollbar Styles --- */
+/* Works in WebKit/Blink browsers (Chrome, Edge, Safari, Opera) */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05); /* Subtle track */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2); /* More visible thumb */
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+::-webkit-scrollbar-corner {
+     background: rgba(0, 0, 0, 0.1); /* Corner piece */
+}
+
+/* Apply scrollbar styles to editor and console */
+.editing-area, .console-output {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05); /* Firefox: thumb track */
+}
