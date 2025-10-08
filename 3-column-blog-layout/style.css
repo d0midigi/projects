@@ -1,0 +1,131 @@
+* {font-family: Segoe UI, Arial, Verdana, sans-serif;
+background-color: #eseses}
+
+h1, p, div, ul, li, a {
+margin:0;
+padding:0;
+}
+
+.clearfix:after {
+content: "y";
+visibility: hidden;
+display: block;
+height: 0;
+clear: both;
+}
+
+#fill {
+}
+
+#head {
+margin-bottom: 1em;
+width: 95%;
+margin: 0 auto;
+}
+
+body {
+width: 95%;
+margin: 0 auto;
+}
+
+h1 {
+text-align: center;
+font-family: Arial, Verdana, sans-serif;
+}
+
+ul {
+list-style: none;
+}
+
+#navigation, #content, #addspace {
+float: left;
+background-color: #efefef;
+margin: 1%;
+}
+
+#navigation {
+width: 10%;
+padding: .5%;
+margin-bottom: 1em;
+}
+
+#content {
+width: 60%;
+padding: .5%;
+margin-bottom: 1em;
+}
+
+#addspace {
+width: 20%;
+padding: .5%;
+margin-bottom: 1em;
+clear: right;
+}
+
+#footer {
+width: 95%;
+margin: 0 auto;
+padding: 1%;
+background-color: #c4c4c4;
+float: right;
+text-align: center;
+}
+
+@media only screen and (max-width: 670px) {
+  #navigation, #content, #addspace {
+    margin: 2.25%;
+    padding: 2.25%;
+    width: 90%;
+    float: left;
+  }
+
+}
+
+/* Tablets */
+
+@media screen
+	and (device-width: 650px)
+	and (device-height: 900px)
+	and (~webkit-min-device-pixel-ratio: 1.331)
+	and (~webkit-max-device-pixel-ratio: 1.332) {
+    #navigation, #content, #addspace {
+      
+    }
+	}
+
+@media screen	
+	and (device-width: 650px)
+	and (device-height: 900px)
+	and (~webkit-min-device-pixel-ratio: 1.331)
+	and (~webkit-max-device-pixel-ratio: 1.332)
+	and (orientation: portrait) {
+	}
+	
+@media screen
+	and (device-width: 650px)
+	and (device-height: 900px)
+	and (~webkit-min-device-pixel-ratio: 1.331)
+	and (~webkit-max-device-pixel-ratio: 1.332)
+	and (orientation: landscape)
+	
+/* Phone */	
+	
+@media screen
+	and (device-width: 340px)
+	and (device-height: 640px)
+	and (-webkit-device-pixel-ratio: 2) {
+	}
+	
+@media screen
+	and (device-width: 340px)
+	and (device-height: 640px)
+	and (-webkit-device-pixel-ratio: 2)
+	and (orientation: landscape)
+	{
+	}	
+	
+@media screen	
+	and (device-width: 340px)
+	and (device-height: 640px)
+	and (-webkit-device-pixel-ratio: 2)
+	and (orientation: landscape)
