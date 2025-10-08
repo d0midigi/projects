@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>3D Interactive Dashboard UI | Animated Widgets | Responsive Design</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="dashboard">
+  <aside class="sidebar">
+    <h2>✨ Dashboard</h2>
+    <ul>
+      <li class="active">Home</li>
+      <li>Analytics</li>
+      <li>Reports</li>
+      <li>Settings</li>
+    </ul>
+    <button id="themeToggle">🌙</button>
+  </aside>
+
+  <main class="content">
+    <header>
+      <h1>Welcome Back, User 👋</h1>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Total Sales</h3>
+        <p>$45,670</p>
+      </div>
+      <div class="card">
+        <h3>Active Users</h3>
+        <p>12,340</p>
+      </div>
+      <div class="card">
+        <h3>Pending Orders</h3>
+        <p>87</p>
+      </div>
+    </section>
+
+    <section class="chart-section">
+      <canvas id="myChart"></canvas>
+    </section>
+  </main>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
