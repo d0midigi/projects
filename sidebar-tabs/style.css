@@ -1,0 +1,101 @@
+:root {
+  --color-theme-rgb: 40, 40, 40;
+  --color-text-rgb: 250, 250, 250;
+  --color-primary-rgb: 80, 110, 120;
+  --color-box-rgb: 30, 30, 30;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(var(--color-theme-rgb));
+  color: rgb(var(--color-text-rgb));
+  margin: 0;
+  min-width: 750px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+}
+
+aside {
+  width: 250px;
+  padding: 1em 0;
+  flex-shrink: 0;
+  flex-basis: 250px;
+}
+
+aside .list,
+aside .list-item {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+aside .list {
+  --depth: 1;
+}
+aside .list-item {
+  padding: 0.5em 1em 0.5em calc(2em * var(--depth));
+  margin: 0 0 3px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+aside .list-item:hover,
+aside .list li:has(.list-item.active) > .list-item,
+aside .list-item.active {
+  background-color: rgb(var(--color-primary-rgb));
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+  cursor: pointer;
+}
+aside .list-item:has(+ .list)::before {
+  content: '';
+  display: block;
+  position: absolute;
+  margin-left: -1.15em;
+  width: 0.3em;
+  height: 0.3em;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  transform: rotate(-45deg);
+  transition: transform 300ms;
+}
+
+.list .list {
+  overflow-y: hidden;
+  height: 0;
+}
+.list .list.open {
+  height: auto;
+}
+.list .list-item:has(+ .list.open)::before {
+  transform: rotate(45deg);
+}
+
+#main {
+  display: block;
+  padding: 0.5em 1em;
+  min-width: 500px;
+  max-width: calc(100% - 250px);
+  flex-grow: 1;
+}
+.box {
+  display: block;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+  background-color: rgb(var(--color-box-rgb));
+}
