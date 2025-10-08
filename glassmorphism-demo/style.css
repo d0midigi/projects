@@ -1,0 +1,36 @@
+:root {
+    background: url("https://150826569.v2.pressablecdn.com/wp-content/uploads/2023/06/14-Sonoma-Light-thumb.jpg");
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glass__container {
+    color: white;
+    width: 75%;
+    margin: 4rem 0;
+    padding: 2rem;
+    border: 1px white solid;
+    border-radius: 3rem;
+    --background-color: #eee4;
+    background: linear-gradient(
+        45deg,
+        transparent 25%,
+        #eee7 50%,
+        transparent 75%
+    );
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0 0.5rem #1116, inset 0 0 0.2rem #eee;
+}
+
+.glass__title {
+    text-align: center;
+}
+
+.glass__text {
+    line-height: 1.5rem;
+}
