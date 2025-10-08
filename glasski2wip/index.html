@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>GlassKi2 -WIP</title>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="app">
+  <aside id="sidebar" class="glass" role="navigation" aria-label="Primary"></aside>
+  <header id="topbar" class="glass" role="banner"></header>
+  <main id="main" role="main">
+    <noscript>
+      <div class="glass card" style="margin:1rem; padding:1rem;">
+        <strong>JavaScript is required.</strong> Enable JS to load the SPA pages (landing, dashboard, blog, shop, forms, etc.).
+      </div>
+    </noscript>
+  </main>
+</div>
+
+<button id="configBtn" class="btn" title="Customize">⚙️</button>
+<div id="config" class="glass card" role="dialog" aria-modal="false" aria-label="Appearance settings"></div>
+
+<!-- ================== INLINE TEMPLATES ================== -->
+<template id="tpl-landing">
+  <div class="page active" data-route="landing">
+    <div class="hero glass">
+      <div>
+        <div class="badge">General Page</div>
+        <h1><span style="background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; color:transparent;">GlassKit demo</span></h1>
+        <p class="muted">A starter with dashboard, auth, blog, shop, social, and portfolio templates. Fully themed and populated in JS.</p>
+        <div style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+          <a href="#/dashboard" class="btn">Open Dashboard</a>
+          <a href="#/products" class="btn ghost">Browse Store</a>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+    <div class="grid cols-3">
+      <div class="glass card">
+        <h3 class="title">Features</h3>
+        <p class="muted">Hash routing SPA, Chart.js, forms, tables, blog, and more.</p>
+      </div>
+      <div class="glass card">
+        <h3 class="title">Theming</h3>
+        <p class="muted">Light/dark/neutral + hue, blur & radius sliders.</p>
+      </div>
+      <div class="glass card">
+        <h3 class="title">Aesthetic</h3>
+        <p class="muted">OS X frosted glass meets soft neu shadows.</p>
+      </div>
+    </div>
+    <div class="footer">© <span id="year"></span> GlassKit • Rapid prototyping</div>
+  </div>
+</template>
+
+<template id="tpl-dashboard">
+  <div class="page" data-route="dashboard">
+    <div class="grid cols-4">
+      <div class="glass card kpi">
+        <div>
+          <div class="muted">New users</div>
+          <div id="kpiUsers" class="title">—</div>
+        </div><span class="pill">+<span id="kpiUsersDelta">—</span>%</span>
+      </div>
+      <div class="glass card kpi">
+        <div>
+          <div class="muted">Sales</div>
+          <div id="kpiSales" class="title">—</div>
+        </div><span class="pill">+<span id="kpiSalesDelta">—</span>%</span>
+      </div>
+      <div class="glass card kpi">
+        <div>
+          <div class="muted">Traffic</div>
+          <div id="kpiTraffic" class="title">—</div>
+        </div><span class="pill">+<span id="kpiTrafficDelta">—</span>%</span>
+      </div>
+      <div class="glass card kpi">
+        <div>
+          <div class="muted">Conversion</div>
+          <div id="kpiConv" class="title">—</div>
+        </div><span class="pill">+<span id="kpiConvDelta">—</span>%</span>
+      </div>
+    </div>
+    <div class="grid cols-2" style="margin-top: var(--gap)">
+      <div class="glass card">
+        <h3 class="title">Traffic (last 12 weeks)</h3><canvas id="trafficChart" height="120"></canvas>
+      </div>
+      <div class="glass card">
+        <h3 class="title">Revenue by month</h3><canvas id="salesChart" height="120"></canvas>
+      </div>
+    </div>
+    <div class="grid cols-3" style="margin-top: var(--gap)">
+      <div class="glass card">
+        <h3 class="title">User roles</h3><canvas id="rolesChart" height="160"></canvas>
+      </div>
+      <div class="glass card">
+        <h3 class="title">Recent orders</h3>
+        <table class="table" id="ordersTable"></table>
+      </div>
+      <div class="glass card">
+        <h3 class="title">Activity</h3>
+        <ul id="activity" style="margin:0; padding-left: 18px;"></ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-login">
+  <div class="page" data-route="login">
+    <div class="grid cols-2">
+      <form class="glass card" onsubmit="alert('Logged in'); return false;">
+        <h3 class="title">Welcome back</h3>
+        <p class="muted">Sign in to continue</p>
+        <label>Email</label><input required type="email" placeholder="you@example.com" />
+        <label>Password</label><input required type="password" placeholder="••••••••" />
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+          <a href="#/forgot" class="muted">Forgot password?</a>
+          <button class="btn" type="submit">Login</button>
+        </div>
+        <p class="muted" style="margin-top:10px;">No account? <a href="#/register">Register</a></p>
+      </form>
+      <div class="glass card">
+        <h3 class="title">Why join?</h3>
+        <ul>
+          <li>Access admin dashboard</li>
+          <li>Save projects & carts</li>
+          <li>Personalized feed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-register">
+  <div class="page" data-route="register">
+    <form class="glass card" onsubmit="alert('Registered'); return false;">
+      <h3 class="title">Create account</h3>
+      <div class="form-grid">
+        <div><label>First name</label><input required placeholder="Ada" /></div>
+        <div><label>Last name</label><input required placeholder="Lovelace" /></div>
+        <div><label>Email</label><input required type="email" placeholder="ada@ex.com" /></div>
+        <div><label>Password</label><input required type="password" /></div>
+        <div><label>Confirm</label><input required type="password" /></div>
+        <div><label>Country</label><select>
+            <option>Serbia</option>
+            <option>BiH</option>
+            <option>Montenegro</option>
+            <option>Croatia</option>
+          </select></div>
+      </div>
+      <label style="display:flex; gap:.5rem; align-items:center; margin-top:.75rem;"><input type="checkbox" required /> I accept Terms</label>
+      <div style="margin-top:10px; display:flex; justify-content:flex-end; gap:8px;">
+        <a class="btn ghost" href="#/login">Back</a>
+        <button class="btn" type="submit">Create account</button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<template id="tpl-forgot">
+  <div class="page" data-route="forgot">
+    <form class="glass card" onsubmit="alert('Reset link sent'); return false;">
+      <h3 class="title">Reset password</h3>
+      <p class="muted">Enter your email and we'll send a reset link.</p>
+      <input required type="email" placeholder="you@example.com" />
+      <div style="margin-top:10px; display:flex; justify-content:space-between;">
+        <a class="btn ghost" href="#/login">Back to login</a>
+        <button class="btn" type="submit">Send link</button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<template id="tpl-user-profile">
+  <div class="page" data-route="user-profile">
+    <div class="grid cols-3">
+      <div class="glass card">
+        <h3 class="title">Your profile</h3>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <img id="profileAvatar" alt="avatar" style="width:64px;height:64px;border-radius:50%; object-fit:cover;" />
+          <div>
+            <div id="profileName" style="font-weight:800;">—</div>
+            <div id="profileEmail" class="muted">—</div>
+          </div>
+        </div>
+        <p style="margin-top:8px;" class="muted">Member since <span id="profileSince">—</span></p>
+      </div>
+      <form class="glass card">
+        <h3 class="title">Edit details</h3>
+        <div class="form-grid">
+          <div><label>First name</label><input id="pfFirst" /></div>
+          <div><label>Last name</label><input id="pfLast" /></div>
+          <div><label>Bio</label><textarea id="pfBio" rows="4"></textarea></div>
+          <div><label>Website</label><input id="pfWeb" /></div>
+        </div>
+        <div style="text-align:right; margin-top:.5rem;"><button class="btn" type="button" onclick="alert('Saved!')">Save</button></div>
+      </form>
+      <div class="glass card">
+        <h3 class="title">Account settings</h3>
+        <label style="display:flex; gap:.6rem; align-items:center; margin:.35rem 0;"><input type="checkbox" checked /> Email notifications</label>
+        <label style="display:flex; gap:.6rem; align-items:center; margin:.35rem 0;"><input type="checkbox" /> Two-factor auth</label>
+        <button class="btn" style="margin-top:8px;">Update</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-contact">
+  <div class="page" data-route="contact">
+    <div class="grid cols-2">
+      <form class="glass card" onsubmit="alert('Message sent!'); return false;">
+        <h3 class="title">Contact us</h3>
+        <div class="form-grid">
+          <div><label>Name</label><input required /></div>
+          <div><label>Email</label><input required type="email" /></div>
+          <div style="grid-column:1/3"><label>Message</label><textarea rows="6" required></textarea></div>
+        </div>
+        <div style="text-align:right; margin-top:.5rem;"><button class="btn">Send</button></div>
+      </form>
+      <div class="glass card">
+        <h3 class="title">Where we are</h3>
+        <p class="muted">123 Glass Street, Neo City</p>
+        <div class="glass" style="height:260px; border-radius:14px; display:grid; place-items:center;">🗺️ Map placeholder</div>
+        <p class="muted" style="margin-top:8px;">Phone: +382 20 123 456 • Email: hello@example.com</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-about">
+  <div class="page" data-route="about">
+    <div class="glass card">
+      <h3 class="title">About GlassKit</h3>
+      <p>Compact starter for prototyping dashboards & sites quickly.</p>
+      <ul>
+        <li>Chart.js charts</li>
+        <li>Hash router</li>
+        <li>Light/Dark/Neutral themes</li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-forms">
+  <div class="page" data-route="forms">
+    <div class="glass card">
+      <h3 class="title">Forms gallery</h3>
+      <div class="form-grid">
+        <div><label>Text</label><input placeholder="Text input" /></div>
+        <div><label>Email</label><input type="email" placeholder="email@example.com" /></div>
+        <div><label>Password</label><input type="password" placeholder="••••••" /></div>
+        <div><label>Number</label><input type="number" value="42" /></div>
+        <div><label>Date</label><input type="date" /></div>
+        <div><label>File</label><input type="file" /></div>
+        <div><label>Range</label><input type="range" /></div>
+        <div><label>Dropdown</label><select>
+            <option>Alpha</option>
+            <option>Beta</option>
+            <option>Gamma</option>
+          </select></div>
+        <div style="grid-column:1/3"><label>Textarea</label><textarea rows="5"></textarea></div>
+        <div><label>Checkboxes</label><label style="display:flex; gap:.5rem; align-items:center;"><input type="checkbox" /> Option A</label><label style="display:flex; gap:.5rem; align-items:center;"><input type="checkbox" /> Option B</label></div>
+        <div><label>Radios</label><label style="display:flex; gap:.5rem; align-items:center;"><input name="r" type="radio" /> One</label><label style="display:flex; gap:.5rem; align-items:center;"><input name="r" type="radio" /> Two</label></div>
+      </div>
+      <div style="text-align:right; margin-top:10px;"><button class="btn">Submit</button></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-search">
+  <div class="page" data-route="search">
+    <div class="glass card">
+      <h3 class="title">Search results</h3>
+      <p class="muted">Query: <span id="searchQuery"></span></p>
+      <div id="searchResults" class="grid cols-3"></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-404">
+  <div class="page" data-route="404">
+    <div class="hero glass">
+      <div>
+        <div class="badge">404 Not Found</div>
+        <h1>Oops — this page melted 🧊</h1>
+        <p class="muted">We couldn't find what you're looking for. Try going back home.</p>
+        <a class="btn" href="#/landing">Go home</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-users">
+  <div class="page" data-route="users">
+    <div class="glass card">
+      <h3 class="title">User management</h3>
+      <div style="display:flex; gap:.5rem; margin:.25rem 0 .75rem;">
+        <input id="userFilter" placeholder="Filter by name/email" />
+        <button id="addUserBtn" class="btn small">Add user</button>
+      </div>
+      <table class="table" id="usersTable"></table>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-settings">
+  <div class="page" data-route="settings">
+    <div class="glass card">
+      <h3 class="title">Application settings</h3>
+      <div class="form-grid">
+        <div><label>Project name</label><input id="setName" value="GlassKit" /></div>
+        <div><label>Default currency</label><select id="setCurrency">
+            <option>USD</option>
+            <option selected>EUR</option>
+            <option>RSD</option>
+          </select></div>
+        <div><label>Low-stock threshold</label><input id="setThreshold" type="number" value="10" /></div>
+        <div><label>Daily email report</label><select id="setReport">
+            <option>Off</option>
+            <option selected>08:00</option>
+            <option>18:00</option>
+          </select></div>
+      </div>
+      <div style="text-align:right; margin-top:.5rem;"><button class="btn" onclick="alert('Settings saved')">Save</button></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-datatables">
+  <div class="page" data-route="datatables">
+    <div class="glass card">
+      <h3 class="title">Orders (sortable/filterable)</h3>
+      <div style="display:flex; gap:.5rem; margin-bottom:.5rem;">
+        <input id="ordersFilter" placeholder="Filter by customer/product" />
+        <button id="sortTotal" class="btn small ghost">Sort by total</button>
+        <button id="sortDate" class="btn small ghost">Sort by date</button>
+      </div>
+      <table class="table" id="ordersTable2"></table>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-products">
+  <div class="page" data-route="products">
+    <div class="glass card">
+      <h3 class="title">Products</h3>
+      <div style="display:flex; gap:.5rem; margin:.25rem 0 .75rem;">
+        <input id="productFilter" placeholder="Filter by title or tag" />
+        <select id="productSort">
+          <option value="popular">Popular</option>
+          <option value="price-asc">Price ↑</option>
+          <option value="price-desc">Price ↓</option>
+        </select>
+      </div>
+      <div id="productGrid" class="grid cols-4"></div>
+    </div>
+  </div>
+</template>
+
+<!-- NOTE: route is #/product/:id so template id must be 'tpl-product' -->
+<template id="tpl-product">
+  <div class="page" data-route="product">
+    <div class="glass card" id="productDetail"></div>
+  </div>
+</template>
+
+<template id="tpl-cart">
+  <div class="page" data-route="cart">
+    <div class="glass card">
+      <h3 class="title">Your cart</h3>
+      <div id="cartItems"></div>
+      <div style="text-align:right; margin-top:.5rem;">
+        <a class="btn ghost" href="#/products">Continue shopping</a>
+        <a class="btn" href="#/checkout">Proceed to checkout</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-checkout">
+  <div class="page" data-route="checkout">
+    <div class="glass card">
+      <h3 class="title">Checkout</h3>
+      <div class="form-grid">
+        <div><label>Full name</label><input id="coName" /></div>
+        <div><label>Email</label><input id="coEmail" type="email" /></div>
+        <div><label>Address</label><input id="coAddress" /></div>
+        <div><label>City</label><input id="coCity" /></div>
+        <div><label>Card number</label><input id="coCard" /></div>
+        <div><label>Expiry</label><input id="coExp" placeholder="MM/YY" /></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:.75rem;">
+        <div class="muted">Total: <b id="coTotal">—</b></div>
+        <button id="placeOrder" class="btn">Place order</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-order-confirmation">
+  <div class="page" data-route="order-confirmation">
+    <div class="hero glass">
+      <div>
+        <div class="badge">Order confirmation</div>
+        <h1>Thanks! Your order <span id="orderNo"></span> is confirmed</h1>
+        <p class="muted">Estimated delivery: <span id="orderEta"></span></p>
+        <a href="#/products" class="btn">Back to store</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-blog">
+  <div class="page" data-route="blog">
+    <div class="glass card">
+      <h3 class="title">Latest posts</h3>
+      <div id="blogGrid" class="grid cols-3"></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-post">
+  <div class="page" data-route="post">
+    <article class="glass card" id="postView"></article>
+  </div>
+</template>
+
+<template id="tpl-category">
+  <div class="page" data-route="category">
+    <div class="glass card">
+      <h3 class="title">Category: <span id="catName"></span></h3>
+      <div id="catGrid" class="grid cols-3"></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-feed">
+  <div class="page" data-route="feed">
+    <div id="feedList" class="grid cols-2"></div>
+  </div>
+</template>
+
+<template id="tpl-profile">
+  <div class="page" data-route="profile">
+    <div class="glass card" id="profilePublic"></div>
+  </div>
+</template>
+
+<template id="tpl-notifications">
+  <div class="page" data-route="notifications">
+    <div class="glass card">
+      <h3 class="title">Notifications</h3>
+      <ul id="notifList" style="margin:0; padding-left:20px;"></ul>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-messages">
+  <div class="page" data-route="messages">
+    <div class="glass card chat">
+      <div id="chatLog" class="chat-log"></div>
+      <form id="chatForm" style="display:flex; gap:.5rem; padding:8px;">
+        <input id="chatInput" placeholder="Type a message…" />
+        <button class="btn small">Send</button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-portfolio">
+  <div class="page" data-route="portfolio">
+    <div class="hero glass">
+      <div>
+        <div class="badge">Portfolio</div>
+        <h1>Hi, I'm <b>Alex</b> — a product designer</h1>
+        <p class="muted">I design thoughtful interfaces for complex systems. Here's a selection of recent work.</p>
+        <div style="margin-top:14px;"><a class="btn" href="#/projects">View projects</a></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-projects">
+  <div class="page" data-route="projects">
+    <div class="glass card">
+      <h3 class="title">Projects</h3>
+      <div id="projGrid" class="grid cols-3"></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-project">
+  <div class="page" data-route="project">
+    <div class="glass card" id="projView"></div>
+  </div>
+</template>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js'></script><script  src="./script.js"></script>
+
+  </body>
+  
+</html>
