@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Glassmorphism Responsive Navbar with Smooth Hover Animation</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glassmorphism Responsive Navbar</title>
+<style>
+  * {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #89f7fe, #66a6ff);
+    min-height: 100vh;
+  }
+  nav {
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }
+  .nav-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
+  .menu {
+    display: flex;
+    gap: 20px;
+  }
+  .menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+  }
+  .menu a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
+  }
+  .menu a:hover::after {
+    width: 100%;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .hamburger span {
+    height: 3px;
+    width: 25px;
+    background: white;
+    margin: 4px 0;
+    transition: 0.4s;
+  }
+
+  @media (max-width: 768px) {
+    .menu {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      flex-direction: column;
+      width: 200px;
+      text-align: right;
+      padding: 20px;
+      transform: translateX(100%);
+      transition: transform 0.4s ease-in-out;
+    }
+    .menu.active {
+      transform: translateX(0);
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="logo">MySite</div>
+    <div class="menu" id="menu">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+
+  hamburger.addEventListener('click', () => {
+    menu.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
