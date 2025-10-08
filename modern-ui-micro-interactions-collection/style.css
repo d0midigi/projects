@@ -1,0 +1,299 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      padding: 2rem;
+      background: #0f172a;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    .section {
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      color: #f8fafc;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    /* Modern Button */
+    .modern-button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: #3b82f6;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modern-button:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    .modern-button:active {
+      transform: translateY(0);
+    }
+
+    /* Glassmorphism Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: scale(1.02);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Magnetic Button */
+    .magnetic-wrap {
+      display: inline-block;
+      position: relative;
+    }
+
+    .magnetic-button {
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #f97316, #db2777);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    /* Expandable Search */
+    .search-container {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .search-container.active {
+      width: 300px;
+    }
+
+    .search-button {
+      width: 50px;
+      height: 50px;
+      background: #4f46e5;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: all 0.3s ease;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 100%;
+      background: #312e81;
+      border: none;
+      border-radius: 25px;
+      padding: 0 60px 0 20px;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .search-input:focus {
+      outline: none;
+    }
+
+    /* Ripple Button */
+    .ripple-button {
+      position: relative;
+      padding: 1rem 2rem;
+      background: #8b5cf6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+
+    .ripple-button:hover {
+      background: #7c3aed;
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      transform: translate(-50%, -50%) scale(0);
+      animation: ripple 0.6s ease-out;
+      width: 100px;
+      height: 100px;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* Checkbox */
+    .checkbox-wrapper {
+      display: inline-block;
+    }
+
+    .custom-checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #64748b;
+      border-radius: 6px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .custom-checkbox::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 12px;
+      height: 12px;
+      background: #22c55e;
+      border-radius: 3px;
+      transition: transform 0.2s ease;
+    }
+
+    .custom-checkbox.checked {
+      border-color: #22c55e;
+    }
+
+    .custom-checkbox.checked::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Progress Button */
+    .progress-button {
+      position: relative;
+      padding: 0.75rem 1.5rem;
+      background: #0ea5e9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .progress-button .progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 3px;
+      background: #f0f9ff;
+      transition: width 0.3s ease;
+    }
+
+    /* Notification Badge */
+    .notification-button {
+      position: relative;
+      padding: 0.75rem;
+      background: #475569;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ef4444;
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      transform: scale(0);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .notification-badge.show {
+      transform: scale(1);
+    }
+
+    /* Success Animation */
+    .success-button {
+      padding: 0.75rem 1.5rem;
+      background: #059669;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .success-icon {
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.3s ease;
+    }
+
+    .success-button.completed .success-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Toast Styles */
+    .toast {
+      position: fixed;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #475569;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .toast.show {
+      bottom: 20px;
+      transform: translateX(-50%) translateY(0);
+    }
