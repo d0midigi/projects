@@ -1,0 +1,45 @@
+#toc {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  position: sticky;
+  top: 10;
+  max-height: calc(100vh - 100px); /* Adjust as needed */
+  overflow-y: auto;
+}
+
+.toc-container ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  margin-top: 25px;
+}
+
+.toc-container li {
+  margin: 8px 0;
+}
+
+.toc-container a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.toc-container a:hover {
+  text-decoration: underline;
+}
+
+.toctogglespan {
+  font-weight: normal;
+  font-size: 0.9em;
+}
+.toctogglelabel {
+  color: blue;
+  text-decoration: blue underline;
+}
+
+.hidden {
+  display: none;
+}
