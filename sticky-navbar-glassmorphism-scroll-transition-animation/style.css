@@ -1,0 +1,64 @@
+:root {
+  --content-width: 48rem;
+  --animationDistance: 12rem;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  font-family: System-Ui, sans-serif;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 2rem;
+}
+
+header {
+  box-shadow: 0 4px 4px -4px black;
+  padding: 0.125rem;
+  background-color: black;
+  color: white;
+  position: sticky;
+  top: 0;
+
+  animation: transformNav linear forwards;
+  animation-timeline: view();
+  animation-range-start: 100vh;
+  animation-range-end: calc(100vh + var(--animationDistance));
+}
+
+nav,
+main {
+  margin-inline: auto;
+  max-width: var(--content-width);
+}
+
+nav {
+  font-weight: bold;
+  font-size: 1.25rem;
+
+  & ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  & li {
+    cursor: pointer;
+  }
+}
+
+article {
+  text-align: justify;
+}
+
+@keyframes transformNav {
+  from {
+  }
+  to {
+    color: black;
+    background-color: transparent;
+    backdrop-filter: blur(0.35rem);
+  }
+}
