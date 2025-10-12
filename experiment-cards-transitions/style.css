@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,900");
+body {
+  background-color: #c1cfda;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYlWNgGDxg8uq9/4lSBMPUMXGQAgA43Q7jBhG+ywAAAABJRU5ErkJggg==);
+}
+
+section {
+  min-height: 300px;
+  width: 100%;
+  margin: 50px auto;
+}
+
+h2 {
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 900;
+  font-family: "Lato", sans-serif;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 22px;
+  font-family: "Lato", sans-serif;
+  color: #fafafa;
+}
+
+.container {
+  margin: 0 auto;
+  width: 95%;
+  max-width: 1000px;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  border: 20px solid #fff;
+  box-shadow: 5px 5px 0 rgba(29, 21, 64, 0.3);
+}
+
+.container:hover .triangle--left:after,
+.container:hover .triangle--right:after {
+  width: 20%;
+  transition: 200ms ease-in;
+}
+.container:hover .triangle--left:before,
+.container:hover .triangle--right:before {
+  width: 25%;
+  transition: 300ms ease;
+}
+.container:hover .image--left,
+.container:hover .image--right {
+  transform: scale(1.1);
+  transition: 400ms ease;
+}
+
+[class^=triangle--] {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: 20%;
+  overflow: hidden;
+}
+[class^=triangle--]:after, [class^=triangle--]:before {
+  content: " ";
+  position: absolute;
+  height: auto;
+  transition: 300ms ease;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.triangle--left:after {
+  border-right: 100px solid transparent;
+  border-top: 400px solid #FF0066;
+  transition: 200ms ease-out;
+  left: 0;
+  z-index: 2;
+  width: 30%;
+}
+
+.triangle--left:before {
+  border-right: 100px solid transparent;
+  border-top: 400px solid #140f2d;
+  transition: 300ms ease-out;
+  left: 0;
+  z-index: 1;
+  width: 35%;
+}
+
+.triangle--right:after {
+  border-left: 100px solid transparent;
+  border-top: 400px solid #FF0066;
+  transition: 200ms ease-out;
+  right: 0;
+  z-index: 2;
+  width: 30%;
+}
+
+.triangle--right:before {
+  border-left: 100px solid transparent;
+  border-top: 400px solid #140f2d;
+  transition: 300ms ease-out;
+  right: 0;
+  z-index: 1;
+  width: 35%;
+}
+
+[class^=text--] {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  bottom: 0;
+  width: 22%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text--left {
+  left: 2%;
+}
+
+.text--right {
+  right: 2%;
+}
+
+[class^=image--] {
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: 1;
+  transition: transform 400ms ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.image--left {
+  background-color: #f1f1f1;
+  background-image: url(https://res.cloudinary.com/jenisora/image/upload/v1500742148/connie1_jvgpih.png);
+  background-position: top;
+  margin-left: 5%;
+}
+
+.image--right {
+  background-image: url(https://res.cloudinary.com/jenisora/image/upload/v1500742148/flowers_q5u63h.jpg);
+  background-position: bottom;
+  margin-right: 5%;
+}
