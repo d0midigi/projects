@@ -1,0 +1,105 @@
+*:not(head, head *, style, script, svg, svg *),
+*:not(head, head *, style, script, svg, svg *)::before,
+*:not(head, head *, style, script, svg, svg *)::after {
+  all: unset;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background-color: black;
+  font: normal normal 300 clamp(1vw, 70vmin, 15vw)/100% "Bitcount Grid Double", system-ui;
+  color: #bbb;
+}
+
+strong {
+  background-color: transparent;
+  background-image: linear-gradient(135deg, #ff0000, #ff3e00, #fc6000, #f17e00, #e09900, #cab100, #afc500, #8ed742, #69e67b, #3df1aa, #00f9d3, #00fff7, #00f9d3, #3df1aa, #69e67b, #8ed742, #afc500, #cab100, #e09900, #f17e00, #fc6000, #ff3e00, #ff0000);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  appearance: none;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: clamp( calc(1vw / 60), calc(2vmin / 5), 2vw );
+  paint-order: stroke fill;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1vw, 16vmin, 4vw);
+  z-index: 1;
+  animation: hue 2s linear infinite;
+}
+strong em {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+strong em span {
+  animation: shake calc(1s / 20) ease infinite;
+  /* subtle shake animation */
+}
+strong em span:nth-child(2) {
+  animation-delay: 0.2s;
+  animation-direction: reverse;
+}
+strong em span:nth-child(3) {
+  animation-delay: 0.4s;
+  animation-direction: alternate;
+}
+strong em span:nth-child(4) {
+  animation-delay: 0.6s;
+  animation-direction: reverse;
+}
+strong em span:nth-child(5) {
+  animation-delay: 0.8s;
+  animation-direction: alternate-reverse;
+}
+strong em span:nth-child(6) {
+  animation-delay: 1s;
+  animation-direction: reverse;
+}
+strong em span:nth-child(7) {
+  animation-delay: 1.2s;
+  animation-direction: alternate;
+}
+
+@keyframes hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+/* Delete below to remove shake */
+@keyframes shake {
+  0% {
+    margin: 0 1px 1px 0;
+  }
+  50% {
+    margin: 1px 0 0 1px;
+  }
+  100% {
+    margin: 0 1px 1px 0;
+  }
+}
