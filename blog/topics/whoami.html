@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From DoD NetSecOps to Solo Hacker: What I Learned Working in Solitude</title>
+    <link rel='stylesheet' href='https://fast.fonts.net/cssapi/2c229d3b-1e35-47f4-954a-e92fa5d7210b.css'>
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-size: 19px;
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        font-weight: 400;
+        line-height: 1.618em;
+        background: #fff;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      /* Container Layout */
+      .container {
+        display: flex;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Sidebar Styles */
+      nav.sidebar {
+        width: 280px;
+        background: #2c3e50;
+        color: #ecf0f1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: 1000;
+        display: block;
+      }
+
+      .sidebar-header {
+        padding: 30px 20px;
+        background: #1a252f;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-header h3 {
+        font-size: 1.5em;
+        font-weight: 400;
+        color: #ecf0f1;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+      }
+
+      /* Sidebar Menu */
+      ul.sidebar-menu {
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .sidebar-menu li {
+        position: relative;
+        display: block;
+      }
+
+      .sidebar-menu a {
+        display: block;
+        padding: 12px 20px;
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+        font-weight: 400;
+        border-left: 3px solid transparent;
+      }
+
+      .sidebar-menu > li > a {
+        font-weight: 500;
+      }
+
+      .sidebar-menu a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-left-color: #3498db;
+        padding-left: 25px;
+      }
+
+      /* Submenu Styles */
+      ul.submenu {
+        display: none;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 0;
+        margin: 0;
+      }
+
+      ul.submenu.active {
+        display: block;
+      }
+
+      .submenu li {
+        display: block;
+      }
+
+      .submenu li a {
+        padding-left: 40px;
+        font-size: 0.85em;
+      }
+
+      .submenu .submenu li a {
+        padding-left: 60px;
+        font-size: 0.8em;
+      }
+
+      .submenu .submenu .submenu li a {
+        padding-left: 80px;
+        font-size: 0.75em;
+      }
+
+      /* Arrow Icon */
+      .arrow {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        font-size: 0.7em;
+        margin-right: 8px;
+      }
+
+      .menu-link.active .arrow {
+        transform: rotate(90deg);
+      }
+
+      /* Article Styles */
+      article {
+        margin-left: 280px;
+        padding: 50px;
+        max-width: 800px;
+        width: 100%;
+        background: #fff;
+      }
+
+      h1 {
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        font-size: 4.26em;
+        line-height: 0.928em;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 400;
+        margin: 0;
+      }
+
+      p.intro {
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        font-size: 1.368em;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        padding: 1.154em;
+        text-align: center;
+        line-height: 1.5em;
+        margin: 1.038em 0px;
+        font-weight: 400;
+      }
+
+      p {
+        font-size: 1em;
+        line-height: 1.421em;
+        color: rgba(51, 51, 51, 0.8);
+        margin: 0px 0px 1.421em 0px;
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        font-weight: 400;
+        text-align: left;
+      }
+
+      h2 {
+        font-size: 1.526em;
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        line-height: 0.931em;
+        margin: 1.5em 0px 0.931em 0px;
+        font-weight: 400;
+      }
+
+      p.pullquote {
+        padding-left: 10px;
+        border-left: 3px solid #333;
+        color: #333333;
+        font-size: 1em;
+        line-height: 1.421em;
+        margin: 0px 0px 1.421em 0px;
+      }
+
+      p.author {
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 2px;
+        margin-top: 27px;
+        color: #666;
+      }
+
+      p.tags {
+        text-align: center;
+        font-size: 14px;
+        color: #999;
+      }
+
+      /* Scrollbar Styling for Sidebar */
+      .sidebar::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .sidebar::-webkit-scrollbar-track {
+        background: #1a252f;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background: #3498db;
+        border-radius: 3px;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb:hover {
+        background: #2980b9;
+      }
+
+      /* Responsive Design */
+      @media screen and (max-width: 900px) {
+        nav.sidebar {
+          width: 250px;
+        }
+        
+        article {
+          margin-left: 250px;
+          padding: 30px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        nav.sidebar {
+          transform: translateX(-280px);
+        }
+        
+        nav.sidebar.active {
+          transform: translateX(0);
+        }
+        
+        article {
+          margin-left: 0;
+          padding: 20px;
+          width: 100%;
+        }
+        
+        h1 {
+          font-size: 3em;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 2.5em;
+        }
+        
+        article {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+    
+  <body>
+    <div class="container">
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h3>Navigation</h3>
+        </div>
+        
+        <ul class="sidebar-menu">
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> About
+            </a>
+            <ul class="submenu">
+              <li><a href="#">My Journey</a></li>
+              <li><a href="#">Philosophy</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> Active Directory
+            </a>
+            <ul class="submenu">
+              <li><a href="#">Kerberos Attacks</a></li>
+              <li><a href="#">Credential Dumping</a></li>
+              <li><a href="#">Delegation Vulnerabilities</a></li>
+              <li><a href="#">LLMNR Poisoning</a></li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> Penetration Testing
+            </a>
+            <ul class="submenu">
+              <li><a href="#">DNS Enumeration</a></li>
+              <li><a href="#">Covert Channels</a></li>
+              <li>
+                <a href="#" class="menu-link">
+                  <span class="arrow">▶</span> Network Security
+                </a>
+                <ul class="submenu">
+                  <li><a href="#">Wireless LAN</a></li>
+                  <li><a href="#">Authentication</a></li>
+                  <li><a href="#">APT Techniques</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> My Book
+            </a>
+            <ul class="submenu">
+              <li><a href="#">Master of Your Domain</a></li>
+              <li><a href="#">7-Day Learning Path</a></li>
+              <li><a href="#">Sample Chapters</a></li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> Tools & Resources
+            </a>
+            <ul class="submenu">
+              <li><a href="#">HackHerWay CybeRepo</a></li>
+              <li><a href="#">Security Tools</a></li>
+              <li><a href="#">Tutorials</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- Main Content -->
+      <article>
+        <h1>From DoD NetSecOps to Solo Hacker</h1>
+        <p class="author">by CALYXIA<br/>Published on: November 13, 2025</p>
+        <p class="tags">Filed in career, personal, solitude, infosec.</p>
+        
+        <p class="intro">What I learned working in solitude—and why the best security research happens when you're completely alone with your thoughts, your terminal, and your demons.</p>
+        
+        <p>I spent years in DoD NetSecOps. Big teams. Big budgets. Big bureaucracy. The kind of environment where a simple firewall rule change requires three meetings, two signatures, and a sacrifice to the compliance gods. I was good at it. Really good. But I was also slowly dying inside.</p>
+
+        <p>Then life happened. Three kids. A divorce. A complete restructuring of everything I thought I knew about myself. And suddenly, I was alone. Really alone. The kids live with their father. My office is silent except for the hum of my machines and the clicking of my mechanical keyboard. No meetings. No small talk. No performance reviews.</p>
+
+        <p class="pullquote">Just me, my code, and the infinite rabbit holes of Active Directory vulnerabilities.</p>
+
+        <h2>The Brutal Honesty of Solitude</h2>
+
+        <p>Here's what nobody tells you about working alone in cybersecurity: you can't hide from your own incompetence. In a team, you can coast. You can delegate. You can nod along in meetings and let someone else figure out why the Kerberos delegation attack isn't working. But alone? When your exploit fails at 2 AM and there's nobody to ask, you have two choices: figure it the fuck out, or go to bed a failure.</p>
+
+        <p>I chose to figure it out. Every. Single. Time.</p>
+
+        <p>That's how I went from a decent IT Specialist to someone writing a comprehensive book on Active Directory security for Springer Nature. Not because I'm naturally gifted (I'm not), but because failure in solitude hits different. It's personal. It's intimate. There's no diffusion of responsibility. The broken exploit, the failed enumeration, the crashed script—that's all on you.</p>
+
+        <h2>Teaching Myself Everything (Again)</h2>
+
+        <p>Three years ago, I knew basic HTML and CSS. That's it. But when you're alone, building your own platforms, creating your own tools, you don't have the luxury of saying "that's not my department." So I learned. JavaScript. React. WebGL shaders. GPU-rendered fractal art because why the hell not. I built HackHerWay CybeRepo from scratch. Multiple educational platforms. Security tools with neon cyberpunk themes because aesthetics matter even when you're dumping credentials.</p>
+
+        <p>Was it efficient? Hell no. I broke things constantly. I still do. I've pushed broken code to production more times than I can count. But that's the gift of solitude—you can fail spectacularly and the only person judging you is yourself. And personally, I'm pretty forgiving when I'm learning.</p>
+
+        <h2>The Depth You Can't Get in Meetings</h2>
+
+        <p>In my DoD days, I knew a lot about a lot of things. Surface-level expertise. Enough to sound smart in briefings. But I didn't truly understand the mechanics of LLMNR poisoning until I spent three days alone, reading RFCs, dissecting Responder's source code, writing my own proof-of-concept from scratch. No meetings interrupted that flow state. No "quick questions" that derail two hours of deep focus.</p>
+
+        <p class="pullquote">Solitude isn't lonely—it's concentrated. It's 12-hour research sessions where you forget to eat because you're too busy reverse-engineering authentication protocols.</p>
+
+        <p>That's how I'm writing "Master of Your Domain: Hacking and Defending Active Directory in 7 Days for Ethical Hackers." Every chapter is born from solo deep-dives. DNS enumeration. Covert channels. Kerberos delegation vulnerabilities. Credential dumping techniques. I don't write about what I've heard in conference talks. I write about what I've broken, fixed, and broken again in my home lab at 3 AM.</p>
+
+        <h2>What Independent Security Researchers Know (That Teams Don't)</h2>
+
+        <p>If you work alone, you already know these truths:</p>
+
+        <p><strong>1. Documentation is survival.</strong> You can't remember why you wrote that weird PowerShell script six months ago. Future-you will curse present-you. Write it down. Comment your code. Not for others—for yourself.</p>
+
+        <p><strong>2. Your home lab is your war room.</strong> I've got more VMs running on my machines than some enterprises. AD forests, vulnerable services, intentionally misconfigured networks. Because when there's no corporate sandbox, you build your own.</p>
+
+        <p><strong>3. Impostor syndrome is louder when you're alone.</strong> But so is the voice that says "fuck it, ship it." Balance is everything. Some days I'm convinced I'm a fraud. Other days I write exploit code that makes me feel like a goddamn wizard. Both are valid.</p>
+
+        <p><strong>4. Community is a choice, not a default.</strong> I work alone, but I'm not isolated. I contribute to communities when I want to. I share knowledge on my terms. I don't have to attend mandatory team-building exercises or pretend to care about someone's fantasy football league.</p>
+
+        <h2>The Freedom to Experiment Without Permission</h2>
+
+        <p>You know what's beautiful about working solo? Nobody tells you "that's not in scope" or "we don't have budget for that." Want to spend a week building a glossary website with particle effects and neon animations for your cybersecurity terms? Do it. Want to create an ant squishing game just to understand JavaScript event handling better? Make it. Want to rewrite your entire DNS enumeration article because you found a better approach? Burn it down and rebuild.</p>
+
+        <p>This freedom breeds creativity. My security tools don't look like everyone else's because I'm not following corporate style guides. My tutorials don't read like everyone else's because I'm not writing for approval—I'm writing for understanding. Mine and yours.</p>
+
+        <h2>The Truth About Solitude</h2>
+
+        <p>Working alone in cybersecurity isn't for everyone. Some people need the energy of a team, the structure of an organization, the validation of managers. That's valid. But for some of us—the ones who thrive in silence, who do our best work at midnight, who learn by breaking things repeatedly until they finally work—solitude isn't isolation.</p>
+
+        <p>It's liberation.</p>
+
+        <p>I have three kids I don't get to see every day. That reality shaped me in ways I'm still processing. But it also gave me something unexpected: uninterrupted time to become the security researcher I always wanted to be. Not the one who attends meetings and writes sanitized reports. The one who digs deep, breaks things, understands the mechanics, and shares that knowledge without corporate filters.</p>
+
+        <p class="pullquote">Solitude taught me that depth beats breadth. Mastery beats exposure. And one person who truly understands Active Directory delegation attacks is worth more than ten who can parrot back what they heard at DEF CON.</p>
+
+        <h2>What's Next</h2>
+
+        <p>I'm finishing my book. Building out HackHerWay. Creating educational tools that look nothing like the sterile corporate security training I used to endure. Writing articles about DNS enumeration, covert channels, and penetration testing techniques—not because anyone asked, but because I need to understand them completely. And the only way I know how to understand something completely is to write about it, code it, break it, and fix it.</p>
+
+        <p>All alone. In my silent office. With my terminal windows open and my music playing and nobody asking me if I've submitted my TPS reports.</p>
+
+        <p>If you're reading this and you work alone too—whether by choice or circumstance—know this: your solitude isn't a bug. It's a feature. Use it. The deepest security research, the most innovative tools, the most thorough understanding of complex systems—these things happen in the quiet spaces. In the solo sessions. In the 3 AM breakthroughs when you finally crack that authentication bypass and there's nobody around to high-five except your cat.</p>
+
+        <p>From DoD NetSecOps to solo hacker wasn't a career plan. It was survival. But it's also become my superpower.</p>
+
+        <p>Welcome to my blog. This is where I document what I learn in solitude. Buckle up—we're going deep.</p>
+
+      </article>
+    </div>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script>
+      $(document).ready(function() {
+        // Toggle submenu on click
+        $('.menu-link').on('click', function(e) {
+          e.preventDefault();
+          
+          var $submenu = $(this).next('.submenu');
+          
+          $(this).toggleClass('active');
+          $submenu.toggleClass('active');
+          
+          $(this).parent().siblings().find('.menu-link').removeClass('active');
+          $(this).parent().siblings().find('.submenu').removeClass('active');
+        });
+      });
+    </script>
+  </body>
+</html>
