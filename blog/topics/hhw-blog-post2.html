@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - hackherway cyberepo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        .blossom {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ffb7e0;
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: fall 15s linear infinite;
+        }
+        .glow { text-shadow: 0 0 10px rgba(255, 54, 171, 0.7); }
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+        .pacifico {   font-family: "Rubik Glitch", system-ui;   font-weight: 200;
+  font-style: normal;
+ }
+        
+        /* Navigation Dropdown Styles */
+        .nav-menu { position: relative; }
+        .nav-menu > ul { display: flex; list-style: none; margin: 0; padding: 0; }
+        .nav-menu ul li { position: relative; }
+        .nav-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+        .nav-menu a:hover { color: #FF36AB; }
+        .nav-menu ul ul {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: rgba(15, 26, 46, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(42, 58, 90, 0.8);
+            border-radius: 0 0 8px 8px;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-menu ul ul ul {
+            top: 0;
+            left: 100%;
+            border-radius: 0 8px 8px 0;
+        }
+        .nav-menu li:hover > ul {
+            visibility: visible;
+            opacity: 1;
+        }
+        .nav-menu ul ul a { font-size: 14px; }
+        .nav-menu ul ul a:hover { background: rgba(255, 54, 171, 0.2); }
+        .nav-menu ul ul li { border-bottom: 1px solid rgba(42, 58, 90, 0.5); }
+        .nav-menu ul ul li:last-child { border-bottom: none; }
+        .nav-menu li.has-sub > a::after {
+            content: '▼';
+            margin-left: 5px;
+            font-size: 0.6em;
+        }
+        .nav-menu ul ul li.has-sub > a::after {
+            content: '▶';
+            float: right;
+        }
+        
+        /* Glassmorphism Effects */
+        .glass-blue {
+            background: rgba(37, 99, 235, 0.1);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+        }
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(30, 41, 59, 0.5);
+        }
+        .glass-white {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body style="background: #000000;">
+    <div id="petals" style="position: fixed; width: 100%; height: 100%; pointer-events: none; z-index: 0;"></div>
+
+    <!-- HEADER WITH GLASSMORPHISM -->
+    <header style="position: sticky; top: 0; z-index: 50; background: rgba(15, 26, 46, 0.75); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(96, 165, 250, 0.3); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 40px;">
+                <a href="#" class="pacifico glow" style="font-size: 32px; color: #FF36AB; text-decoration: none;">hackherway</a>
+                
+                <!-- NAVIGATION WITH DROPDOWNS -->
+                <nav class="nav-menu orbitron" style="display: flex;">
+                    <ul>
+                        <li class="has-sub">
+                            <a href="#">Menu 1</a>
+                            <ul>
+                                <li class="has-sub">
+                                    <a href="#">Submenu 1.1</a>
+                                    <ul>
+                                        <li><a href="#">Submenu 1.1.1</a></li>
+                                        <li class="has-sub">
+                                            <a href="#">Submenu 1.1.2</a>
+                                            <ul>
+                                                <li><a href="#">Submenu 1.1.2.1</a></li>
+                                                <li><a href="#">Submenu 1.1.2.2</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="has-sub">
+                                    <a href="#">Submenu 1.2</a>
+                                    <ul>
+                                        <li><a href="#">Submenu 1.2.1</a></li>
+                                        <li><a href="#">Submenu 1.2.2</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a href="#">Menu 2</a>
+                            <ul>
+                                <li><a href="#">Submenu 2.1</a></li>
+                                <li><a href="#">Submenu 2.2</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a href="#">Menu 3</a>
+                            <ul>
+                                <li><a href="#">Submenu 3.1</a></li>
+                                <li><a href="#">Submenu 3.2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="position: relative;">
+                    <input type="text" placeholder="Search hackherway..." style="background: rgba(26, 40, 66, 0.6); backdrop-filter: blur(8px); color: white; border-radius: 999px; padding: 10px 16px 10px 40px; font-size: 14px; border: 1px solid rgba(96, 165, 250, 0.3); width: 250px;">
+                    <i class="ri-search-line" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af;"></i>
+                </div>
+                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: rgba(26, 40, 66, 0.6); backdrop-filter: blur(8px); border: 1px solid rgba(96, 165, 250, 0.3); cursor: pointer;">
+                    <i class="ri-heart-line" style="color: white; font-size: 20px;"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div style="display: flex; position: relative; z-index: 10;">
+        
+        <!-- SIDEBAR TOC WITH GLASSMORPHISM -->
+        <aside class="glass-dark" style="width: 280px; border-right: 1px solid rgba(96, 165, 250, 0.3); position: sticky; top: 70px; height: calc(100vh - 70px); overflow-y: auto; box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);">
+            <div style="padding: 32px 24px;">
+                <h3 class="orbitron" style="color: #FF36AB; font-weight: bold; font-size: 20px; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255, 54, 171, 0.5);">Table of Contents</h3>
+                <nav style="display: flex; flex-direction: column; gap: 4px;">
+                    <a href="#intro" class="toc-link" style="color: white; text-decoration: none; padding: 10px 16px; border-left: 3px solid transparent; transition: all 0.3s; border-radius: 4px;">Introduction</a>
+                    <a href="#start" class="toc-link" style="color: white; text-decoration: none; padding: 10px 16px; border-left: 3px solid transparent; transition: all 0.3s; border-radius: 4px;">Getting Started</a>
+                    <a href="#prereq" class="toc-link" style="color: #d1d5db; text-decoration: none; padding: 10px 16px; padding-left: 32px; border-left: 3px solid transparent; font-size: 14px; transition: all 0.3s; border-radius: 4px;">Prerequisites</a>
+                    <a href="#req" class="toc-link" style="color: #9ca3af; text-decoration: none; padding: 10px 16px; padding-left: 48px; border-left: 3px solid transparent; font-size: 14px; transition: all 0.3s; border-radius: 4px;">Requirements</a>
+                    <a href="#core" class="toc-link" style="color: white; text-decoration: none; padding: 10px 16px; border-left: 3px solid transparent; transition: all 0.3s; border-radius: 4px;">Core Concepts</a>
+                    <a href="#adv" class="toc-link" style="color: white; text-decoration: none; padding: 10px 16px; border-left: 3px solid transparent; transition: all 0.3s; border-radius: 4px;">Advanced Techniques</a>
+                    <a href="#end" class="toc-link" style="color: white; text-decoration: none; padding: 10px 16px; border-left: 3px solid transparent; transition: all 0.3s; border-radius: 4px;">Conclusion</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main style="flex: 1; min-width: 0;">
+            <!-- FULL WIDTH BLOG IMAGE -->
+            <div style="width: 100%; height: 400px; overflow: hidden; position: relative;">
+                <img src="https://i.imgur.com/2HzsG5f.gif" alt="Blog Header" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 100%);"></div>
+            </div>
+            
+            <!-- TITLE SECTION WITH GLASSMORPHISM -->
+            <div class="glass-blue" style="padding: 48px 32px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <h1 class="orbitron glow" style="font-size: 48px; font-weight: bold; color: white; margin-bottom: 16px; line-height: 1.2;">Beginner's Guide to Cosplay: Start Your Journey</h1>
+                    <div style="color: #e5e7eb; font-size: 15px; display: flex; align-items: center; gap: 8px;">
+                        <i class="ri-calendar-line"></i>
+                        <span>April 8, 2025</span>
+                        <span style="margin: 0 4px;">•</span>
+                        <i class="ri-time-line"></i>
+                        <span>15 min read</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOG CONTENT - DARK WRAPPER WITH GLASSMORPHISM -->
+            <div style="background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(16px); padding: 80px 32px;">
+                <div style="max-width: 900px; margin: 0 auto; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); border-radius: 16px; padding: 72px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(96, 165, 250, 0.1);">
+                    
+                    <!-- INTRO -->
+                    <section id="intro" style="margin-bottom: 72px; scroll-margin-top: 100px;">
+                        <h1 class="orbitron" style="font-size: 36px; font-weight: bold; color: #0f172a; margin-bottom: 28px; border-bottom: 3px solid #FF36AB; padding-bottom: 12px;">Introduction</h1>
+                        <p style="margin-bottom: 20px; color: #1e293b; line-height: 1.9; font-size: 16px;">
+                            Learn how to create your first anime cosplay with our step-by-step guide. We cover everything from choosing the right character to finding affordable materials and putting it all together. Whether you're a complete beginner or looking to refine your skills, this comprehensive guide will help you bring your favorite characters to life.
+                        </p>
+                        <p style="color: #1e293b; line-height: 1.9; font-size: 16px;">
+                            Cosplay is more than just dressing up—it's an art form that combines creativity, craftsmanship, and passion. This guide will walk you through every step of the journey, from conception to completion.
+                        </p>
+                    </section>
+
+                    <!-- GETTING STARTED -->
+                    <section id="start" style="margin-bottom: 72px; scroll-margin-top: 100px;">
+                        <h1 class="orbitron" style="font-size: 36px; font-weight: bold; color: #0f172a; margin-bottom: 28px; border-bottom: 3px solid #FF36AB; padding-bottom: 12px;">Getting Started</h1>
+                        <p style="margin-bottom: 24px; color: #1e293b; line-height: 1.9; font-size: 16px;">
+                            Before diving into your first cosplay project, it's important to understand the fundamentals. This section will guide you through the essential preparations and considerations.
+                        </p>
+                        
+                        <div id="prereq" style="margin-bottom: 40px; scroll-margin-top: 100px;">
+                            <h2 class="orbitron" style="font-size: 28px; font-weight: bold; color: #334155; margin-bottom: 20px;">Prerequisites</h2>
+                            <p style="margin-bottom: 20px; color: #1e293b; line-height: 1.9; font-size: 16px;">
+                                Starting your cosplay journey requires some basic preparation. Here's what you need to know before beginning your first project.
+                            </p>
+                            
+                            <div id="req" style="margin-left: 24px; padding: 24px; background: rgba(37, 99, 235, 0.05); border-left: 4px solid #3b82f6; border-radius: 8px; scroll-margin-top: 100px;">
+                                <h3 class="orbitron" style="font-size: 22px; font-weight: bold; color: #475569; margin-bottom: 16px;">System Requirements</h3>
+                                <ul style="list-style: disc; padding-left: 28px; color: #1e293b; line-height: 2; font-size: 16px;">
+                                    <li style="margin-bottom: 12px;">A dedicated workspace with good lighting</li>
+                                    <li style="margin-bottom: 12px;">Basic sewing supplies (needles, thread, scissors)</li>
+                                    <li style="margin-bottom: 12px;">Reference images of your chosen character</li>
+                                    <li style="margin-bottom: 12px;">Budget planning tools</li>
+                                    <li>Time management skills</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- CORE CONCEPTS -->
+                    <section id="core" style="margin-bottom: 72px; scroll-margin-top: 100px;">
+                        <h1 class="orbitron" style="font-size: 36px; font-weight: bold; color: #0f172a; margin-bottom: 28px; border-bottom: 3px solid #FF36AB; padding-bottom: 12px;">Core Concepts</h1>
+                        <p style="color: #1e293b; line-height: 1.9; font-size: 16px;">
+                            Understanding the fundamental concepts of cosplay will help you create more authentic and impressive costumes. Cosplay involves several key elements: costume construction, prop making, wig styling, and makeup application. Each element requires different skills and techniques that you'll develop over time.
+                        </p>
+                    </section>
+
+                    <!-- ADVANCED TECHNIQUES -->
+                    <section id="adv" style="margin-bottom: 72px; scroll-margin-top: 100px;">
+                        <h1 class="orbitron" style="font-size: 36px; font-weight: bold; color: #0f172a; margin-bottom: 28px; border-bottom: 3px solid #FF36AB; padding-bottom: 12px;">Advanced Techniques</h1>
+                        <p style="color: #1e293b; line-height: 1.9; font-size: 16px;">
+                            Once you've mastered the basics, these advanced techniques will take your cosplay to the next level. Professional cosplayers use armor building, LED integration, and advanced weathering techniques to create stunning, convention-winning costumes.
+                        </p>
+                    </section>
+
+                    <!-- CONCLUSION -->
+                    <section id="end" style="margin-bottom: 32px; scroll-margin-top: 100px;">
+                        <h1 class="orbitron" style="font-size: 36px; font-weight: bold; color: #0f172a; margin-bottom: 28px; border-bottom: 3px solid #FF36AB; padding-bottom: 12px;">Conclusion</h1>
+                        <p style="margin-bottom: 20px; color: #1e293b; line-height: 1.9; font-size: 16px;">
+                            Starting your cosplay journey is an exciting adventure. Remember that every expert cosplayer started as a beginner, and improvement comes with practice and patience. Don't be afraid to experiment, make mistakes, and learn from the incredible cosplay community.
+                        </p>
+                        <div style="margin-top: 40px; padding: 28px; background: linear-gradient(135deg, rgba(255, 54, 171, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%); border-left: 5px solid #FF36AB; border-radius: 12px; backdrop-filter: blur(8px);">
+                            <p style="font-weight: bold; color: #0f172a; margin-bottom: 12px; font-size: 18px;">💡 Pro Tip:</p>
+                            <p style="color: #1e293b; line-height: 1.8; font-size: 16px;">Start with a simple character for your first cosplay. This builds confidence and teaches you the basics before tackling more complex costumes. Join online cosplay communities for support and inspiration!</p>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER WITH GLASSMORPHISM -->
+    <footer class="glass-dark" style="color: white; padding: 72px 24px 40px; position: relative; z-index: 10; border-top: 1px solid rgba(96, 165, 250, 0.3);">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <a href="#" class="pacifico glow" style="font-size: 38px; color: #FF36AB; text-decoration: none; display: inline-block; margin-bottom: 20px;">hackherway</a>
+            <p style="color: #94a3b8; margin-bottom: 28px; font-size: 15px;">Your one-stop destination for all things cybersecurity and ethical hacking.</p>
+            <div style="margin-bottom: 28px; display: flex; justify-content: center; gap: 16px;">
+                <a href="#" style="color: #94a3b8; font-size: 14px; text-decoration: none; transition: color 0.3s;">Home</a>
+                <span style="color: #475569;">•</span>
+                <a href="#" style="color: #94a3b8; font-size: 14px; text-decoration: none; transition: color 0.3s;">Blog</a>
+                <span style="color: #475569;">•</span>
+                <a href="#" style="color: #94a3b8; font-size: 14px; text-decoration: none; transition: color 0.3s;">Contact</a>
+            </div>
+            <p style="color: #64748b; font-size: 14px;">© 2025 hackherway. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Cherry Blossoms
+        const petals = document.getElementById('petals');
+        function makeBlossom() {
+            const b = document.createElement('div');
+            b.className = 'blossom';
+            b.style.left = Math.random() * 100 + '%';
+            b.style.animationDuration = (15 + Math.random() * 10) + 's';
+            petals.appendChild(b);
+            setTimeout(() => b.remove(), 15000);
+        }
+        setInterval(makeBlossom, 300);
+        for (let i = 0; i < 25; i++) setTimeout(makeBlossom, i * 100);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const id = link.getAttribute('href').slice(1);
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // TOC hover effects
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('mouseenter', e => {
+                e.target.style.borderLeftColor = '#FF36AB';
+                e.target.style.color = '#FF36AB';
+                e.target.style.transform = 'translateX(8px)';
+                e.target.style.background = 'rgba(255, 54, 171, 0.1)';
+            });
+            link.addEventListener('mouseleave', e => {
+                e.target.style.borderLeftColor = 'transparent';
+                e.target.style.transform = 'translateX(0)';
+                e.target.style.background = 'transparent';
+                const pl = e.target.style.paddingLeft;
+                e.target.style.color = pl === '48px' ? '#9ca3af' : (pl === '32px' ? '#d1d5db' : 'white');
+            });
+        });
+
+        // Footer link hovers
+        document.querySelectorAll('footer a[href="#"]').forEach(link => {
+            link.addEventListener('mouseenter', e => e.target.style.color = '#FF36AB');
+            link.addEventListener('mouseleave', e => e.target.style.color = '#94a3b8');
+        });
+    </script>
+</body>
+</html>
