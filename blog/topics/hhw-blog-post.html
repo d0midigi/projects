@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A simple blog design</title>
+    <link rel='stylesheet' href='https://fast.fonts.net/cssapi/2c229d3b-1e35-47f4-954a-e92fa5d7210b.css'>
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-size: 19px;
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        font-weight: 400;
+        line-height: 1.618em;
+        background: #fff;
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      /* Container Layout */
+      .container {
+        display: flex;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Sidebar Styles */
+      nav.sidebar {
+        width: 280px;
+        background: #2c3e50;
+        color: #ecf0f1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: 1000;
+        display: block;
+      }
+
+      .sidebar-header {
+        padding: 30px 20px;
+        background: #1a252f;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-header h3 {
+        font-size: 1.5em;
+        font-weight: 400;
+        color: #ecf0f1;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+      }
+
+      /* Sidebar Menu */
+      ul.sidebar-menu {
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .sidebar-menu li {
+        position: relative;
+        display: block;
+      }
+
+      .sidebar-menu a {
+        display: block;
+        padding: 12px 20px;
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+        font-weight: 400;
+        border-left: 3px solid transparent;
+      }
+
+      .sidebar-menu > li > a {
+        font-weight: 500;
+      }
+
+      .sidebar-menu a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-left-color: #3498db;
+        padding-left: 25px;
+      }
+
+      /* Submenu Styles */
+      ul.submenu {
+        display: none;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 0;
+        margin: 0;
+      }
+
+      ul.submenu.active {
+        display: block;
+      }
+
+      .submenu li {
+        display: block;
+      }
+
+      .submenu li a {
+        padding-left: 40px;
+        font-size: 0.85em;
+      }
+
+      .submenu .submenu li a {
+        padding-left: 60px;
+        font-size: 0.8em;
+      }
+
+      .submenu .submenu .submenu li a {
+        padding-left: 80px;
+        font-size: 0.75em;
+      }
+
+      /* Arrow Icon */
+      .arrow {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        font-size: 0.7em;
+        margin-right: 8px;
+      }
+
+      .menu-link.active .arrow {
+        transform: rotate(90deg);
+      }
+
+      /* Article Styles */
+      article {
+        margin-left: 280px;
+        padding: 50px;
+        max-width: 800px;
+        width: 100%;
+        background: #fff;
+      }
+
+      h1 {
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        font-size: 4.26em;
+        line-height: 0.928em;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 400;
+        margin: 0;
+      }
+
+      p.intro {
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        font-size: 1.368em;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        padding: 1.154em;
+        text-align: center;
+        line-height: 1.5em;
+        margin: 1.038em 0px;
+        font-weight: 400;
+      }
+
+      p {
+        font-size: 1em;
+        line-height: 1.421em;
+        color: rgba(51, 51, 51, 0.8);
+        margin: 0px 0px 1.421em 0px;
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        font-weight: 400;
+        text-align: left;
+      }
+
+      h2 {
+        font-size: 1.526em;
+        font-family: "Brandon Grotesque W01", Arial, sans-serif;
+        line-height: 0.931em;
+        margin: 1.5em 0px 0.931em 0px;
+        font-weight: 400;
+      }
+
+      p.pullquote {
+        padding-left: 10px;
+        border-left: 3px solid #333;
+        color: #333333;
+        font-size: 1em;
+        line-height: 1.421em;
+        margin: 0px 0px 1.421em 0px;
+      }
+
+      p.author {
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 2px;
+        margin-top: 27px;
+        color: #666;
+      }
+
+      p.tags {
+        text-align: center;
+        font-size: 14px;
+        color: #999;
+      }
+
+      /* Scrollbar Styling for Sidebar */
+      .sidebar::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .sidebar::-webkit-scrollbar-track {
+        background: #1a252f;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb {
+        background: #3498db;
+        border-radius: 3px;
+      }
+
+      .sidebar::-webkit-scrollbar-thumb:hover {
+        background: #2980b9;
+      }
+
+      /* Responsive Design */
+      @media screen and (max-width: 900px) {
+        nav.sidebar {
+          width: 250px;
+        }
+        
+        article {
+          margin-left: 250px;
+          padding: 30px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        nav.sidebar {
+          transform: translateX(-280px);
+        }
+        
+        nav.sidebar.active {
+          transform: translateX(0);
+        }
+        
+        article {
+          margin-left: 0;
+          padding: 20px;
+          width: 100%;
+        }
+        
+        h1 {
+          font-size: 3em;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 2.5em;
+        }
+        
+        article {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+    
+  <body>
+    <div class="container">
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar">
+        <div class="sidebar-header">
+          <h3>Navigation</h3>
+        </div>
+        
+        <ul class="sidebar-menu">
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> Typography
+            </a>
+            <ul class="submenu">
+              <li><a href="#">Web Fonts</a></li>
+              <li>
+                <a href="#" class="menu-link">
+                  <span class="arrow">▶</span> Font Families
+                </a>
+                <ul class="submenu">
+                  <li><a href="#">Serif</a></li>
+                  <li><a href="#">Sans-Serif</a></li>
+                  <li><a href="#">Monospace</a></li>
+                  <li><a href="#">Display</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Emotional Typography</a></li>
+              <li><a href="#">Type Scale</a></li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> Design
+            </a>
+            <ul class="submenu">
+              <li><a href="#">Layout</a></li>
+              <li>
+                <a href="#" class="menu-link">
+                  <span class="arrow">▶</span> Responsive Design
+                </a>
+                <ul class="submenu">
+                  <li><a href="#">Mobile First</a></li>
+                  <li><a href="#">Breakpoints</a></li>
+                  <li><a href="#">Flexible Grids</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Color Theory</a></li>
+              <li><a href="#">Spacing</a></li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> Code
+            </a>
+            <ul class="submenu">
+              <li><a href="#">HTML5</a></li>
+              <li>
+                <a href="#" class="menu-link">
+                  <span class="arrow">▶</span> CSS
+                </a>
+                <ul class="submenu">
+                  <li><a href="#">Flexbox</a></li>
+                  <li><a href="#">Grid</a></li>
+                  <li>
+                    <a href="#" class="menu-link">
+                      <span class="arrow">▶</span> Preprocessors
+                    </a>
+                    <ul class="submenu">
+                      <li><a href="#">SASS</a></li>
+                      <li><a href="#">LESS</a></li>
+                      <li><a href="#">Stylus</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="#">JavaScript</a></li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> Ghost
+            </a>
+            <ul class="submenu">
+              <li><a href="#">Getting Started</a></li>
+              <li><a href="#">External Linking</a></li>
+              <li>
+                <a href="#" class="menu-link">
+                  <span class="arrow">▶</span> Themes
+                </a>
+                <ul class="submenu">
+                  <li><a href="#">Development</a></li>
+                  <li><a href="#">Customization</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Publishing</a></li>
+            </ul>
+          </li>
+          
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <span class="arrow">▶</span> Resources
+            </a>
+            <ul class="submenu">
+              <li><a href="#">Tools</a></li>
+              <li><a href="#">Tutorials</a></li>
+              <li><a href="#">Community</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- Main Content -->
+      <article>
+        <h1>Ghost &amp; external linking</h1>
+        <p class="author">by DOMINICK TURNBULL<br/>Published on: 17th March, 2014.</p>
+        <p class="tags">Filed in code, ghost, tags.</p>
+        <p class="intro">This would be the first paragraph of the page, defined by a class of .lead. This is so that we can clearly outline the core aspect of the article. Not every article would require a lead.</p>
+        <p>This, like many of our other traditional perceptions of digital and interactive experiences, are either changing or being replaced altogether as we enter the post-PC era. New devices have such high resolution displays that individual pixels become imperceptibly small. Other devices, like the Amazon Kindle, eschew pixels altogether — opting to use electronic ink.</p>
+        <p class="pullquote">These new devices are radically transforming what is possible in digital visual design and this has radical implications for digital typography.</p>
+        <p>The death of the pixel leaves you with a flowing, magazine-quality canvas to design for. A canvas where curves are curves, not ugly pixel approximations of curves. A canvas that begins to blur the line between what we consider to be real and what we consider to be virtual.</p>
+        <p>It wasn't too long ago that there was one set of rules for use of type on print and use of type on screen. Now that we have screens that are essentially print quality, we have to reevaluate these conventions.</p>
+        <p>Web sites are transforming from boring fields of Arial to embrace the gamut of typographical possibilities offered by web fonts. Web fonts, combined with the style and layout options presented by the creative use of CSS and JavaScript offer a new world of typographic opportunity on the web.</p>
+        <h2>Emotional Typography</h2>
+        <p>Web fonts allow for a wider palette of typefaces which can provide far more quirkiness and personality.</p>
+        <p>The challenge is to help people understand this. The classics such as Arial, Helvetica, Verdana or Tahoma are engrained as fonts you will always expect to see; readers aren't used to seeing type choices beyond these usual suspects.</p>
+        <p>The majority of screen graphics are done with JPGs that don't scale from the regular screens to retina screens. Now if you have these new type choices as web fonts, you have a scalable version of this which you can use, providing endless possibilities.</p>
+        <h2>Technical Advantages</h2>
+        <p>Think of this as adapting your tone of voice to the type of person or situation you are in. If you were being given a medical diagnosis the tone would not be fun or light-hearted. In contrast talking colloquially to a close friend could be the opposite of this.</p>
+        <p>Web fonts allow you to have this kind of razor-sharp efficiency and elegance in design whilst at the same time avoiding the need for adding additional page graphics, which in turn add load time, decrease workflow performance and risk breaking across screen dimensions and device situations.</p>
+      </article>
+    </div>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script>
+      $(document).ready(function() {
+        // Toggle submenu on click
+        $('.menu-link').on('click', function(e) {
+          e.preventDefault();
+          
+          var $submenu = $(this).next('.submenu');
+          
+          $(this).toggleClass('active');
+          $submenu.toggleClass('active');
+          
+          $(this).parent().siblings().find('.menu-link').removeClass('active');
+          $(this).parent().siblings().find('.submenu').removeClass('active');
+        });
+      });
+    </script>
+  </body>
+</html>
